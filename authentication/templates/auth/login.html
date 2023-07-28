@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!-- saved from url=(0014)about:internet -->
 <html>
@@ -33,7 +34,7 @@
 
     <link
       rel="stylesheet"
-      href="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/69d9fb00b3e2a51b4160eaa7dcbb766a-1-1.css"
+      href="/static/69d9fb00b3e2a51b4160eaa7dcbb766a-1-1.css"
       as="style"
       onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;"
       crossorigin="anonymous"
@@ -42,12 +43,12 @@
     <link
       rel="stylesheet"
       media="screen"
-      href="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/69d9fb00b3e2a51b4160eaa7dcbb766a-1-1.css"
+      href="/static/69d9fb00b3e2a51b4160eaa7dcbb766a-1-1.css"
       crossorigin="anonymous"
     />
     <link
       rel="stylesheet"
-      href="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/css2"
+      href="/static/css2"
       as="style"
       onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;"
       crossorigin="anonymous"
@@ -56,19 +57,19 @@
     <link
       rel="stylesheet"
       media="screen"
-      href="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/css2"
+      href="/static/css2"
       crossorigin="anonymous"
     />
     <script
-      src="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/jquery.min.js.download"
+      src="/static/jquery.min.js.download"
       crossorigin="anonymous"
     ></script>
     <script
-      src="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/feather.min.js.download"
+      src="/static/feather.min.js.download"
       crossorigin="anonymous"
     ></script>
     <script
-      src="./Dumps With Pin Shop 2022 _ Buy Dumps _ Fresh CVV _ Credit Card Dumps_files/eafdd5fabf1a52ad39bfa7bd0f024870-1-1.js.download"
+      src="/static/eafdd5fabf1a52ad39bfa7bd0f024870-1-1.js.download"
       async=""
       crossorigin="anonymous"
     ></script>
@@ -83,8 +84,9 @@
           >
         </div>
         <div class="bf-auth-content-block">
-          <form action="https://bigfat.cc/" id="loginForm" method="post" enctype="multipart/form-data" class="bf-auth-form">
+          <form action="/auth/login/" id="loginForm" method="post" enctype="multipart/form-data" class="bf-auth-form" login-form>
             <div class="bf-auth-area-block">
+              {% csrf_token %}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -100,7 +102,7 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              <input name="email" type="text" value="" placeholder="Nickname" />
+              <input name="username" type="text" value="" placeholder="Nickname" />
             </div>
             <div class="bf-auth-area-block password">
               <svg
@@ -153,8 +155,9 @@
             </div>
           </form>
 
-          <form action="https://bigfat.cc/" id="regForm" method="post" enctype="multipart/form-data" class="bf-signup-form hidden">
+          <form action="/auth/signup/" id="regForm" method="post" enctype="multipart/form-data" class="bf-signup-form hidden" signup-form>
             <span id="error_username" class="alert"></span>
+            {% csrf_token %}
             <div class="bf-auth-area-block">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

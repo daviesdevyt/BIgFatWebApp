@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "base"
+    "base", "authentication"
 ]
 
 MIDDLEWARE = [
@@ -54,6 +54,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bigfat.urls'
+
+AUTH_USER_MODEL = 'authentication.User'
+
 
 TEMPLATES = [
     {
