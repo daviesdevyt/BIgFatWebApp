@@ -7,7 +7,7 @@ def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        remember = request.POST.get('remember')
+        remember = request.POST.get('remember_me')
         remember = remember == 'on'
         user = authenticate(request, username=username, password=password)
         print(user)
