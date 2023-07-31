@@ -34,3 +34,14 @@ class CC(BaseModel):
     ssn = models.CharField(max_length=255, null=True, blank=True)
     DOB = models.DateField(null=True, blank=True)
     price = models.FloatField()
+
+class Fullz(BaseModel):
+    name = models.CharField(max_length=255)
+    DOB = models.DateField(null=True, blank=True)
+    category = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    zip = models.IntegerField()
+    description = models.TextField()
+    price = models.FloatField()

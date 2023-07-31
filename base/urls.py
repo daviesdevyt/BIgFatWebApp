@@ -6,4 +6,5 @@ urlpatterns = [
     path('transactions/', views.wallet, name='wallet'),
     path('support/', views.support, name='support'),
     path('cc/', views.cc, name='cc'),
+    path('fullz/', views.fullz, name='fullz'),
 ]
