@@ -5,4 +5,5 @@ urlpatterns = [
     path('news/', views.news, name='news'),
     path('transactions/', views.wallet, name='wallet'),
     path('support/', views.support, name='support'),
+    path('cc/', views.cc, name='cc'),
 ]

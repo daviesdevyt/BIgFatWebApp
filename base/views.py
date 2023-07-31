@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import News
+from .models import News, CC
 # Create your views here.
 def news(request):
     return render(request, 'base/news.html', {"news": News.objects.order_by("-pub_date")})
@@ -10,4 +10,8 @@ def wallet(request):
 
 def support(request):
     return render(request, 'base/support.html')
+
+def cc(request):
+    return render(request, "base/cc.html", {"ccs": CC.objects.all()})
+
 
