@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
   <link rel="canonical" href="https://bigfat.cc/" />
-  <title>Fullz</title>
+  <title>{{ name|title }}</title>
 
   <!--<base href="https://bigfat.cc/">-->
   <base href="." />
@@ -53,7 +53,7 @@
         <div class="bf-article-headbox-left">
           <ol class="bf-breadcrumb">
             <li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
-            <li class="bf-breadcrumb-item"><a href="/fullz">Fullz</a></li>
+            <li class="bf-breadcrumb-item"><a href="/{{ name }}">{{ name|title }}</a></li>
           </ol>
         </div>
 
@@ -108,14 +108,9 @@
     <div class="bf-article-inner">
       <div class="bf-table-box bf-dumps-table">
         <div class="bf-table-header">
-          <div class="bf-table-cell"><span>Name</span></div>
-          <div class="bf-table-cell"><span>DOB</span></div>
-          <div class="bf-table-cell"><span>Category</span></div>
-          <div class="bf-table-cell"><span>Country</span></div>
-          <div class="bf-table-cell"><span>State</span></div>
-          <div class="bf-table-cell"><span>City</span></div>
-          <div class="bf-table-cell"><span>ZIP</span></div>
+          <div class="bf-table-cell"><span>Title</span></div>
           <div class="bf-table-cell"><span>Description</span></div>
+          <div class="bf-table-cell"><span>Category</span></div>
           <div class="bf-table-cell"><span>PRICE</span></div>
           <div class="bf-table-cell"><span>QTY</span></div>
           <div class="bf-table-cell"><span>&nbsp;</span></div>
@@ -124,35 +119,20 @@
 
       <div class="bf-table-box bf-dumps-table">
         <ul class="bf-table-items-row popular-tag-items">
-          {% for fullz in fullzz %}
+          {% for row in data %}
           <li class="bf-table-item-row">
             <div class="bf-table-items">
               <div class="bf-table-cell">
-                <span><small>Name</small> {{fullz.name}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>DOB</small> {{fullz.DOB}} </span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="VISA">
-                <span><small>Category</small> {{fullz.category}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="CLASSIC">
-                <span><small>Country</small>{{fullz.country}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>State</small>{{fullz.state}}</span>
+                <span><small>Bin</small> {{row.title}}</span>
               </div>
               <div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
-                <span><small>City</small>{{fullz.city}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="CHASE BANK USA, N.A.">
-                <span><small>ZIP</small>{{fullz.zip}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="high-valid-usa-07-28-2023">
-                <span><small>Description</small>{{fullz.description}}</span>
+                <span><small>Description</small>{{row.description}}</span>
               </div>
               <div class="bf-table-cell">
-                <span><small>Price:</small>$ {{fullz.price}}</span>
+                <span><small>Category</small>{{row.category}}</span>
+              </div>
+              <div class="bf-table-cell">
+                <span><small>Price:</small>$ {{row.price}}</span>
               </div>
               <div class="bf-table-cell">
                 <div class="bf-table-quantity">

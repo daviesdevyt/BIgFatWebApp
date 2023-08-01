@@ -7,4 +7,6 @@ urlpatterns = [
     path('support/', views.support, name='support'),
     path('cc/', views.cc, name='cc'),
     path('fullz/', views.fullz, name='fullz'),
+    path('dumps/', views.dumps, name='dumps'),
+    path('<str:title>/', views.logs, name='logs'),
 ]

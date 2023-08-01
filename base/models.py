@@ -45,3 +45,42 @@ class Fullz(BaseModel):
     zip = models.IntegerField()
     description = models.TextField()
     price = models.FloatField()
+
+class Dumps(BaseModel):
+    bin = models.CharField(max_length=255)
+    code = models.CharField(max_length=255)
+    cc_type = models.CharField(max_length=255, choices=(("Visa", "Visa"), ("Mastercard", "Mastercard"), ("Amex", "Amex"), ("Discover", "Discover"), ("JCB", "JCB"), ("Diners Club", "Diners Club")))
+    country = models.CharField(max_length=255)
+    bank = models.CharField(max_length=255)
+    description = models.TextField()
+    price = models.FloatField()
+    class Meta:
+        verbose_name_plural = "Dumps"
+
+class Logs(BaseModel):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.CharField(max_length=255)
+    extra = models.TextField()
+    price = models.FloatField()
+    class Meta:
+        verbose_name_plural = "Logs"
+
+class Guides(BaseModel):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.CharField(max_length=255)
+    extra = models.TextField()
+    price = models.FloatField()
+    class Meta:
+        verbose_name_plural = "Guides"
+
+class Services(BaseModel):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    category = models.CharField(max_length=255)
+    extra = models.TextField()
+    price = models.FloatField()
+    class Meta:
+        verbose_name_plural = "Services"
+
