@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)https://bigfat.cc/cart -->
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="canonical" href="https://bigfat.cc/" />
+	<title>Shopping Cart</title>
+
+	<!--<base href="https://bigfat.cc/">-->
+	<base href="." />
+
+	<meta name="viewport"
+		content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="address=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<link rel="apple-touch-icon" sizes="180x180"
+		href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32"
+		href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/favicon-16x16.png" />
+	<link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
+	<meta name="msapplication-TileColor" content="#da532c" />
+	<meta name="theme-color" content="#ffffff" />
+
+	<link rel="stylesheet" href="/static/61ad427ae611110d9f02176ddcad45ae-1-1.css" as="style"
+		onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+		media="screen" />
+	<link rel="stylesheet" media="screen" href="/static/61ad427ae611110d9f02176ddcad45ae-1-1.css"
+		crossorigin="anonymous" />
+	<link rel="stylesheet" href="/static/css2" as="style"
+		onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+		media="screen" />
+	<link rel="stylesheet" media="screen" href="/static/css2" crossorigin="anonymous" />
+	<script src="/static/jquery.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/feather.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/js.cookie.min.js.download" async="" crossorigin="anonymous"></script>
+	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/9e00fb18cf547f8953ab4aa24a81f4cd-1-1.js.download" async=""
+		crossorigin="anonymous"></script>
+	<script src="/static/cart.js"></script>
+</head>
+
+<body>
+	{% include 'base/header.html' %}
+	<div class="bf-article-page">
+		<div class="bf-article-page-headbox">
+			<div class="bf-article-page-headbox-overflow">
+				<div class="bf-article-headbox-left">
+					<ol class="bf-breadcrumb">
+						<li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
+						<li class="bf-breadcrumb-item"><a href="/cart">Cart</a></li>
+					</ol>	
+				</div>
+
+				<div class="bf-headbox-right">
+					<div class="bf-table-display-style"><i class="button-rows"></i><i class="button-columns"></i></div>
+					<a href="/empty-cart" class="bf-clear-cart-button"><svg
+							xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-trash-2">
+							<polyline points="3 6 5 6 21 6"></polyline>
+							<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+							</path>
+							<line x1="10" y1="11" x2="10" y2="17"></line>
+							<line x1="14" y1="11" x2="14" y2="17"></line>
+						</svg>Empty cart</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="bf-article-inner hide_bases_all">
+			<div id="vars" style="display: none; position: absolute" data-check_all_price="2.30"></div>
+
+			<div class="bf-check-cart-info">
+				<div class="bf-check-cart-infotext">
+					All items are non-refundable!
+				</div>
+				<div class="bf-check-cart-total">Total: <strong>$ {{total}}</strong></div>
+			</div>
+
+			<div class="bf-place-order-button">
+				<a href="/checkout" onclick="javascript:order_checkout_handle(); return false;">Buy
+					Now</a>
+			</div>
+
+			<div class="bf-table-box bf-cart-table">
+				<div class="bf-table-header">
+					<!-- <div class="bf-table-cell"><span>BIN</span></div> -->
+					<div class="bf-table-cell"><span>Product</span></div>
+					<div class="bf-table-cell"><span>Name</span></div>
+					<div class="bf-table-cell"><span>Country</span></div>
+					<div class="bf-table-cell"><span>Qty</span></div>
+					<div class="bf-table-cell"><span>Price</span></div>
+					<div class="bf-table-cell"><span>&nbsp;</span></div>
+				</div>
+			</div>
+
+			<div class="bf-table-box bf-cart-table">
+				<ul class="bf-table-items-row popular-tag-items">
+					{% for item in cart %}
+					<li class="bf-table-item-row">
+						<div class="bf-table-items">
+							<div class="bf-table-cell">
+								<span><small>Product</small>{{ item.product }}</span>
+							</div>
+							
+							<div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
+								<span><small>Name</small>{{ item.name|default_if_none:"N/A" }}{{item.title}}</span>
+							</div>
+							<div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
+								<span><small>Country</small>{{ item.country|default:"N/A" }}</span>
+							</div>
+							<div class="bf-table-cell cart-product-qty">
+								<span><small>Qty</small>1</span>
+							</div>
+							<div class="bf-table-cell">
+								<span><small>Price</small>$ {{item.price}}</span>
+							</div>
+							<div class="bf-table-cell">
+								<span><a href="/delete-cart/{{item.cart_id}}">
+									<button class="clear-button"></button></span>
+								</a>
+							</div>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

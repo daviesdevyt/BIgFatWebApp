@@ -1,13 +1,16 @@
 from django.db import models
+from authentication.models import User
+import uuid
 
 # Create your models here.
 class BaseModel(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
 
-class News(models.Model):
+class News(BaseModel):
     title = models.CharField(max_length=100)
     content = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
@@ -84,3 +87,14 @@ class Services(BaseModel):
     class Meta:
         verbose_name_plural = "Services"
 
+class CartProduct(BaseModel):
+    product = models.CharField(max_length=64)
+    product_id = models.UUIDField()
+    user = models.ForeignKey(User, models.CASCADE, related_name="cart")
+
+    def get_data(self):
+        data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
+        obj = data[self.product].objects.get(id=self.product_id)
+        obj.product = self.product.upper()
+        obj.cart_id = self.id
+        return obj

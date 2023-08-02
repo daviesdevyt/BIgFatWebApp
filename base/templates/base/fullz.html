@@ -43,6 +43,7 @@
   <script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
+	<script src="/static/cart.js"></script>
 </head>
 
 <body>
@@ -133,22 +134,22 @@
               <div class="bf-table-cell">
                 <span><small>DOB</small> {{fullz.DOB}} </span>
               </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="VISA">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.category}}">
                 <span><small>Category</small> {{fullz.category}}</span>
               </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="CLASSIC">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.country}}">
                 <span><small>Country</small>{{fullz.country}}</span>
               </div>
               <div class="bf-table-cell">
                 <span><small>State</small>{{fullz.state}}</span>
               </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.city}}">
                 <span><small>City</small>{{fullz.city}}</span>
               </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="CHASE BANK USA, N.A.">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.zip}}">
                 <span><small>ZIP</small>{{fullz.zip}}</span>
               </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="high-valid-usa-07-28-2023">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.description}}">
                 <span><small>Description</small>{{fullz.description}}</span>
               </div>
               <div class="bf-table-cell">
@@ -163,7 +164,7 @@
                 </div>
               </div>
               <div class="bf-table-cell">
-                <button class="addcart" data-product-id="2115524"></button>
+                <button class="addcart" data-product-id="fullz/{{fullz.id}}"></button>
               </div>
             </div>
           </li>

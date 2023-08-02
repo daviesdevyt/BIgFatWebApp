@@ -43,6 +43,7 @@
   <script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
+  <script src="/static/cart.js"></script>
 </head>
 
 <body>
@@ -125,7 +126,7 @@
               <div class="bf-table-cell">
                 <span><small>Bin</small> {{row.title}}</span>
               </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{row.description}}">
                 <span><small>Description</small>{{row.description}}</span>
               </div>
               <div class="bf-table-cell">
@@ -143,7 +144,7 @@
                 </div>
               </div>
               <div class="bf-table-cell">
-                <button class="addcart" data-product-id="2115524"></button>
+                <button class="addcart" data-product-id="{{name}}/{{row.id}}"></button>
               </div>
             </div>
           </li>

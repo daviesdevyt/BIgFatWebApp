@@ -44,6 +44,7 @@
 	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
+	<script src="/static/cart.js"></script>
 </head>
 
 <body>
@@ -135,31 +136,31 @@
 					{% for cc in ccs%}
 					<li class="bf-table-item-row">
 						<div class="bf-table-items">
-							<div class="bf-table-cell bf-title-fulltext" data-title="434622 N/A">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc}}">
 								<span><small>CC</small>{{cc.cc}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="VISA">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{ cc.month|stringformat:'02d' }}/{{cc.year|stringformat:'02d'}}">
 								<span><small>Exp</small>{{ cc.month|stringformat:"02d" }}/{{cc.year|stringformat:"02d"}}</span>
 							</div>
 							<div class="bf-table-cell">
 								<span><small>CVV</small>{{cc.cvv}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="N/A">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.name}}">
 								<span><small>Name</small>{{cc.name}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.address}}">
 								<span><small>Address</small>{{cc.address}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="COMMUNITY BANK, N.A.">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.city}}">
 								<span><small>City</small>{{cc.city}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="N/A">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.state}}">
 								<span><small>State</small>{{cc.state}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="mix-states-fresh-07-31-2023-4">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.zip}}">
 								<span><small>ZIP</small>{{cc.zip}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="mix-states-fresh-07-31-2023-4">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.country}}">
 								<span><small>Country</small>{{cc.country}}</span>
 							</div>
 							<div class="bf-table-cell">
@@ -178,7 +179,7 @@
 								<span><small>Price</small>$ {{cc.price}}</span>
 							</div>
 							<div class="bf-table-cell">
-								<button class="addcart" data-product-id="2209737"></button>
+								<button class="addcart" data-product-id="cc/{{cc.id}}"></button>
 							</div>
 						</div>
 					</li>
