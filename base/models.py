@@ -23,6 +23,8 @@ class News(BaseModel):
 
 class Product(BaseModel):
     delivered_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    extra = models.TextField(null=True, blank=True)
+
     class Meta:
         abstract=True
     
@@ -69,7 +71,6 @@ class Logs(Product):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
-    extra = models.TextField()
     price = models.FloatField()
     class Meta:
         verbose_name_plural = "Logs"
@@ -78,7 +79,6 @@ class Guides(Product):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
-    extra = models.TextField()
     price = models.FloatField()
     class Meta:
         verbose_name_plural = "Guides"
@@ -87,7 +87,6 @@ class Services(Product):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
-    extra = models.TextField()
     price = models.FloatField()
     class Meta:
         verbose_name_plural = "Services"

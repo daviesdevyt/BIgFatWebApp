@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from utils.oxapay import Oxapay
 from authentication.models import User
-from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services
+from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services, Order
 # Create your views here.
 
 @login_required
@@ -35,19 +35,19 @@ def support(request):
     return render(request, 'base/support.html')
 @login_required
 def cc(request):
-    return render(request, "base/cc.html", {"ccs": CC.objects.order_by("date_created")})
+    return render(request, "base/cc.html", {"ccs": CC.objects.filter(delivered_to=None).order_by("date_created")})
 @login_required
 def fullz(request):
-    return render(request, "base/fullz.html", {"fullzz": Fullz.objects.order_by("date_created")})
+    return render(request, "base/fullz.html", {"fullzz": Fullz.objects.filter(delivered_to=None).order_by("date_created")})
 @login_required
 def dumps(request):
-    return render(request, "base/dumps.html", {"dumps": Dumps.objects.order_by("date_created")})
+    return render(request, "base/dumps.html", {"dumps": Dumps.objects.filter(delivered_to=None).order_by("date_created")})
 @login_required
 def logs(request, title):
     if title not in ["logs", "guides", "services"]:
         return HttpResponse(status=404)
     classes = {"logs": Logs, "guides": Guides, "services": Services}
-    return render(request, "base/logs.html", {"data": classes[title].objects.order_by("date_created"), "name": title})
+    return render(request, "base/logs.html", {"data": classes[title].objects.filter(delivered_to=None).order_by("date_created"), "name": title})
 
 @login_required
 def cart(request):
@@ -87,3 +87,24 @@ def verify_tx(request):
                 user.balance += tx["amount"]
                 user.save()
     return HttpResponse(status=200)
+
+@login_required
+def checkout(request):
+    if len(request.user.cart) > 0:
+        orders = []
+        total = 0
+        for item in request.user.cart:
+            total += item.get_data().price
+            orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
+        if total > request.user.balance:
+            # TODO: Alert no enough balance
+            return redirect("cart")
+        Order.objects.bulk_create(orders)
+        empty_cart(request)
+    return redirect("purchases")
+
+def purchases(request):
+    purchases = list()
+    for item in Order.objects.filter(user=request.user):
+        purchases.append(item.get_data())
+    return render(request, "base/purchases.html", {"purchases": purchases})
