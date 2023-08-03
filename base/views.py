@@ -1,14 +1,35 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
-
+from utils.oxapay import Oxapay
+from authentication.models import User
 from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services
 # Create your views here.
+
 @login_required
 def news(request):
     return render(request, 'base/news.html', {"news": News.objects.order_by("-pub_date")})
+
 @login_required
 def wallet(request):
-    return render(request, 'base/add money.html')
+    if request.method == "POST":
+        amt = request.POST.get("amt")
+        if not amt:
+            return HttpResponse(status=400)
+        try:
+            amt = float(amt)
+            base_url = request.get_host()
+            res = Oxapay().payment_request(amt, base_url+"/verify", returnUrl=base_url+"/transactions", description=request.user.username)
+            User.objects.filter(id=request.user.id).update(pay_link=res["payLink"])
+        except:
+            amt = request.COOKIES.get('amt')
+    else:
+        amt = request.COOKIES.get('amt')
+        if not amt:
+            amt = 100
+    response =  render(request, 'base/add money.html', {"amt":amt})
+    response.set_cookie("amt", amt)
+    return response
+
 @login_required
 def support(request):
     return render(request, 'base/support.html')
@@ -54,3 +75,15 @@ def add_cart(request, type, prod_id):
 def empty_cart(request):
     CartProduct.objects.filter(user=request.user).delete()
     return redirect("cart")
+
+def verify_tx(request):
+    if request.method == "GET":
+        trackId = request.GET.get("trackId")
+        status = request.GET.get("status")
+        if status == "1":
+            tx = Oxapay().get_transaction(trackId)
+            if tx["status"] == 1:
+                user = User.objects.filter(username=tx["description"]).first()
+                user.balance += tx["amount"]
+                user.save()
+    return HttpResponse(status=200)

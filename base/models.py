@@ -21,7 +21,12 @@ class News(BaseModel):
     class Meta:
         verbose_name_plural = "News"
 
-class CC(BaseModel):
+class Product(BaseModel):
+    delivered_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    class Meta:
+        abstract=True
+    
+class CC(Product):
     cc = models.CharField(max_length=16)
     month = models.IntegerField()
     year = models.IntegerField()
@@ -38,7 +43,7 @@ class CC(BaseModel):
     DOB = models.DateField(null=True, blank=True)
     price = models.FloatField()
 
-class Fullz(BaseModel):
+class Fullz(Product):
     name = models.CharField(max_length=255)
     DOB = models.DateField(null=True, blank=True)
     category = models.CharField(max_length=255)
@@ -49,7 +54,7 @@ class Fullz(BaseModel):
     description = models.TextField()
     price = models.FloatField()
 
-class Dumps(BaseModel):
+class Dumps(Product):
     bin = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
     cc_type = models.CharField(max_length=255, choices=(("Visa", "Visa"), ("Mastercard", "Mastercard"), ("Amex", "Amex"), ("Discover", "Discover"), ("JCB", "JCB"), ("Diners Club", "Diners Club")))
@@ -60,7 +65,7 @@ class Dumps(BaseModel):
     class Meta:
         verbose_name_plural = "Dumps"
 
-class Logs(BaseModel):
+class Logs(Product):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
@@ -69,7 +74,7 @@ class Logs(BaseModel):
     class Meta:
         verbose_name_plural = "Logs"
 
-class Guides(BaseModel):
+class Guides(Product):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
@@ -78,7 +83,7 @@ class Guides(BaseModel):
     class Meta:
         verbose_name_plural = "Guides"
 
-class Services(BaseModel):
+class Services(Product):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
@@ -97,4 +102,15 @@ class CartProduct(BaseModel):
         obj = data[self.product].objects.get(id=self.product_id)
         obj.product = self.product.upper()
         obj.cart_id = self.id
+        return obj
+
+class Order(BaseModel):
+    product = models.CharField(max_length=64)
+    product_id = models.UUIDField()
+    user = models.ForeignKey(User, models.CASCADE, related_name="orders")
+
+    def get_data(self):
+        data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
+        obj = data[self.product].objects.get(id=self.product_id)
+        obj.product = self.product.upper()
         return obj

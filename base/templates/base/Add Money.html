@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://bigfat.cc/transactions -->
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<link rel="canonical" href="https://bigfat.cc/" />
+	<title>Add Money</title>
+
+	<!--<base href="https://bigfat.cc/">-->
+	<base href="." />
+
+	<meta name="viewport"
+		content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="format-detection" content="address=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<link rel="apple-touch-icon" sizes="180x180"
+		href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32"
+		href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16"
+		href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/favicon-16x16.png" />
+	<link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
+	<meta name="msapplication-TileColor" content="#da532c" />
+	<meta name="theme-color" content="#ffffff" />
+
+	<link rel="stylesheet" href="/static/61ad427ae611110d9f02176ddcad45ae-1-1.css" as="style"
+		onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+		media="screen" />
+	<link rel="stylesheet" media="screen" href="/static/61ad427ae611110d9f02176ddcad45ae-1-1.css"
+		crossorigin="anonymous" />
+	<link rel="stylesheet" href="/static/css2" as="style"
+		onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+		media="screen" />
+	<link rel="stylesheet" media="screen" href="/static/css2" crossorigin="anonymous" />
+	<script src="/static/jquery.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/feather.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/js.cookie.min.js.download" async="" crossorigin="anonymous"></script>
+	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
+	<script src="/static/92fb9581c692b76215e857ec6376c303-1-1.js.download" async="" crossorigin="anonymous"></script>
+</head>
+
+<body class="">
+	{% include 'base/header.html' %}
+
+	<div class="bf-article-page">
+		<div class="bf-article-page-headbox">
+			<div class="bf-article-page-headbox-overflow">
+				<div class="bf-article-headbox-left">
+					<ol class="bf-breadcrumb">
+						<li class="bf-breadcrumb-item"><a href="https://bigfat.cc/news">Home</a></li>
+						<li class="bf-breadcrumb-item"><a href="https://bigfat.cc/transactions">Add money</a></li>
+					</ol>
+				</div>
+			</div>
+		</div>
+		<div class="bf-payment-page">
+			<div class="bf-payment-block">
+				<div class="bf-payment-header-block">
+					<a href="/transactions" class="bf-go-to-site"><svg
+							xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+							class="feather feather-corner-up-left">
+							<polyline points="9 14 4 9 9 4"></polyline>
+							<path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+						</svg></a>
+					<a href="/news" class="bf-logo-header"><span><strong>Big</strong>Fat</span></a>
+				</div>
+
+				<div class="bf-payment-main-content">
+					<div class="bf-payment-main-info">
+						<div class="bf-payment-left-column">
+							<div class="bf-payment-quarcode">
+								{% if request.user.pay_link %}
+								<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={{request.user.pay_link}}" alt="{{request.user.pay_link}}"
+									title="{{request.user.pay_link}}" />
+								{% else %}
+								<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=SelectAPriceFirst"/>
+								{% endif %}
+
+							</div>
+
+							<div class="bf-loader-payment">
+								<img src="/static/ajax.svg"
+									style="margin: auto; background: rgb(48, 48, 77); display: block" />
+								<p>Waiting payments</p>
+							</div>
+						</div>
+
+						<div class="bf-payment-information-column">
+							<h2>Add funds to balance of {{ request.user.username }}</h2>
+							{% if request.user.pay_link %}
+							<p>Please click the link to add balance</p>
+							<p>{{request.user.pay_link}}</p>
+							{% else %}
+							<p>Select a price to pay in ($)</p>
+							{% endif %}
+
+							<div class="bf-payments-balans">
+								Balance: <strong><span id="value-balance">$ {{request.user.balance}}</span></strong>
+							</div>
+
+							<div class="bf-payment-money-information">
+								<form method="post" action="">
+									{% csrf_token %}
+									<input id="input-calc" name="amt" type="text" size="3" value="{{amt}}" wfd-id="id0" />
+									<div class="bf-payment-formula">
+										<button type="submit" id="input-calc" style="padding: 10px;border-radius:10px;font-family:Arial, Helvetica, sans-serif">
+											Set
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+
+					<div id="table-transactions" class="bf-transaction-information div-data" style="display: none"
+						data-testnet="" data-datetime="2023-07-28 19:56:38" data-txw="">
+						<div class="bf-transaction-table bf-head-table">
+							<div class="bf-transaction-table-column"><span>Transations</span></div>
+							<div class="bf-transaction-table-column"><span>Amount</span></div>
+							<div class="bf-transaction-table-column"><span>Rate</span></div>
+							<div class="bf-transaction-table-column"><span>Sum</span></div>
+							<div class="bf-transaction-table-column"><span>Confirm</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
