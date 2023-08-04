@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["cashflowcartel.club"]
 
 
 # Application definition
@@ -128,6 +128,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 LOGIN_URL = "/auth/login"
+
+STATIC_ROOT = '/home/static'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
