@@ -27,7 +27,7 @@ def wallet(request):
         amt = request.COOKIES.get('amt')
         if not amt:
             amt = 100
-    response =  render(request, 'base/add money.html', {"amt":amt})
+    response =  render(request, 'base/add-money.html', {"amt":amt})
     response.set_cookie("amt", amt)
     return response
 
