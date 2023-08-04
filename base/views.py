@@ -18,8 +18,9 @@ def wallet(request):
             return HttpResponse(status=400)
         try:
             amt = float(amt)
-            base_url = request.get_host()
+            base_url = "https://"+request.get_host()
             res = Oxapay().payment_request(amt, base_url+"/verify", returnUrl=base_url+"/transactions", description=request.user.username)
+            request.user.pay_link = res["payLink"]
             User.objects.filter(id=request.user.id).update(pay_link=res["payLink"])
         except:
             amt = request.COOKIES.get('amt')

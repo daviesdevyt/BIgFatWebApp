@@ -69,7 +69,7 @@
 							<polyline points="9 14 4 9 9 4"></polyline>
 							<path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
 						</svg></a>
-					<a href="/news" class="bf-logo-header"><span><strong>Big</strong>Fat</span></a>
+					<a href="/news" class="bf-logo-header"><span>Cash<strong>Flow</strong>Cartel</span></a>
 				</div>
 
 				<div class="bf-payment-main-content">
@@ -96,7 +96,9 @@
 							<h2>Add funds to balance of {{ request.user.username }}</h2>
 							{% if request.user.pay_link %}
 							<p>Please click the link to add balance</p>
-							<p>{{request.user.pay_link}}</p>
+							<a href="{{request.user.pay_link}}">
+								<h2>{{request.user.pay_link}}</h2>
+							</a>
 							{% else %}
 							<p>Select a price to pay in ($)</p>
 							{% endif %}
