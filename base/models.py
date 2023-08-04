@@ -32,13 +32,13 @@ class CCBase(BaseModel):
     name = models.CharField(max_length=255)
 
 class CC(Product):
-    base = models.ForeignKey(CCBase, on_delete=models.CASCADE)
+    base = models.ForeignKey(CCBase, on_delete=models.CASCADE, null=True)
     cc = models.CharField(max_length=16)
     month = models.IntegerField()
     year = models.IntegerField()
     cvv = models.IntegerField()
     name = models.CharField(max_length=255)
-    description = models.TextField()
+    description = models.TextField(null=True, blank=True)
     address = models.TextField()
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
