@@ -21,17 +21,11 @@ class News(BaseModel):
     class Meta:
         verbose_name_plural = "News"
 
-class Product(BaseModel):
-    purchased = models.BooleanField(default=False)
-    extra = models.TextField(null=True, blank=True)
-
-    class Meta:
-        abstract=True
 
 class CCBase(BaseModel):
     name = models.CharField(max_length=255)
 
-class CC(Product):
+class CC(BaseModel):
     base = models.ForeignKey(CCBase, on_delete=models.CASCADE, null=True)
     cc = models.CharField(max_length=16)
     month = models.IntegerField()
@@ -49,8 +43,10 @@ class CC(Product):
     ssn = models.CharField(max_length=255, null=True, blank=True)
     DOB = models.DateField(null=True, blank=True)
     price = models.FloatField()
+    purchased = models.BooleanField(default=False)
+    extra = models.TextField(null=True, blank=True)
 
-class Fullz(Product):
+class Fullz(BaseModel):
     name = models.CharField(max_length=255)
     DOB = models.DateField(null=True, blank=True)
     category = models.CharField(max_length=255)
@@ -60,8 +56,10 @@ class Fullz(Product):
     zip = models.IntegerField()
     description = models.TextField()
     price = models.FloatField()
+    purchased = models.BooleanField(default=False)
+    extra = models.TextField(null=True, blank=True)
 
-class Dumps(Product):
+class Dumps(BaseModel):
     bin = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
     cc_type = models.CharField(max_length=255, choices=(("Visa", "Visa"), ("Mastercard", "Mastercard"), ("Amex", "Amex"), ("Discover", "Discover"), ("JCB", "JCB"), ("Diners Club", "Diners Club")))
@@ -69,30 +67,38 @@ class Dumps(Product):
     bank = models.CharField(max_length=255)
     description = models.TextField()
     price = models.FloatField()
+    purchased = models.BooleanField(default=False)
+    extra = models.TextField(null=True, blank=True)
     class Meta:
         verbose_name_plural = "Dumps"
 
-class Logs(Product):
+class Logs(BaseModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
     price = models.FloatField()
+    purchased = models.BooleanField(default=False)
+    extra = models.TextField(null=True, blank=True)
     class Meta:
         verbose_name_plural = "Logs"
 
-class Guides(Product):
+class Guides(BaseModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
     price = models.FloatField()
+    purchased = models.BooleanField(default=False)
+    extra = models.TextField(null=True, blank=True)
     class Meta:
         verbose_name_plural = "Guides"
 
-class Services(Product):
+class Services(BaseModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
     category = models.CharField(max_length=255)
     price = models.FloatField()
+    purchased = models.BooleanField(default=False)
+    extra = models.TextField(null=True, blank=True)
     class Meta:
         verbose_name_plural = "Services"
 
