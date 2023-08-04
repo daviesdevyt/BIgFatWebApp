@@ -22,18 +22,23 @@ class News(BaseModel):
         verbose_name_plural = "News"
 
 class Product(BaseModel):
-    delivered_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
 
     class Meta:
         abstract=True
-    
+
+class CCBase(BaseModel):
+    name = models.CharField(max_length=255)
+
 class CC(Product):
+    base = models.ForeignKey(CCBase, on_delete=models.CASCADE)
     cc = models.CharField(max_length=16)
     month = models.IntegerField()
     year = models.IntegerField()
     cvv = models.IntegerField()
     name = models.CharField(max_length=255)
+    description = models.TextField()
     address = models.TextField()
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)

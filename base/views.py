@@ -37,19 +37,19 @@ def support(request):
     return render(request, 'base/support.html')
 @login_required
 def cc(request):
-    return render(request, "base/cc.html", {"ccs": CC.objects.filter(delivered_to=None).order_by("date_created")})
+    return render(request, "base/cc.html", {"ccs": CC.objects.filter(delivered=False).order_by("date_created")})
 @login_required
 def fullz(request):
-    return render(request, "base/fullz.html", {"fullzz": Fullz.objects.filter(delivered_to=None).order_by("date_created")})
+    return render(request, "base/fullz.html", {"fullzz": Fullz.objects.filter(delivered=False).order_by("date_created")})
 @login_required
 def dumps(request):
-    return render(request, "base/dumps.html", {"dumps": Dumps.objects.filter(delivered_to=None).order_by("date_created")})
+    return render(request, "base/dumps.html", {"dumps": Dumps.objects.filter(delivered=False).order_by("date_created")})
 @login_required
 def logs(request, title):
     if title not in ["logs", "guides", "services"]:
         return HttpResponse(status=404)
     classes = {"logs": Logs, "guides": Guides, "services": Services}
-    return render(request, "base/logs.html", {"data": classes[title].objects.filter(delivered_to=None).order_by("date_created"), "name": title})
+    return render(request, "base/logs.html", {"data": classes[title].objects.filter(delivered=False).order_by("date_created"), "name": title})
 
 @login_required
 def cart(request):
