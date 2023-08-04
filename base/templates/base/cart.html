@@ -43,8 +43,7 @@
 	<script src="/static/js.cookie.min.js.download" async="" crossorigin="anonymous"></script>
 	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
-	<script src="/static/9e00fb18cf547f8953ab4aa24a81f4cd-1-1.js.download" async=""
-		crossorigin="anonymous"></script>
+	<script src="/static/9e00fb18cf547f8953ab4aa24a81f4cd-1-1.js.download" async="" crossorigin="anonymous"></script>
 	<script src="/static/cart.js"></script>
 </head>
 
@@ -57,14 +56,14 @@
 					<ol class="bf-breadcrumb">
 						<li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
 						<li class="bf-breadcrumb-item"><a href="/cart">Cart</a></li>
-					</ol>	
+					</ol>
 				</div>
 
 				<div class="bf-headbox-right">
 					<div class="bf-table-display-style"><i class="button-rows"></i><i class="button-columns"></i></div>
-					<a href="/empty-cart" class="bf-clear-cart-button"><svg
-							xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-							stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+					<a href="/empty-cart" class="bf-clear-cart-button"><svg xmlns="http://www.w3.org/2000/svg"
+							width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 							class="feather feather-trash-2">
 							<polyline points="3 6 5 6 21 6"></polyline>
 							<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
@@ -130,6 +129,8 @@
 							</div>
 						</div>
 					</li>
+					{% empty %}
+					No items in cart
 					{% endfor %}
 				</ul>
 			</div>

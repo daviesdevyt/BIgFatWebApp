@@ -108,7 +108,7 @@
 
     <div class="bf-article-inner">
 
-      <div class="bf-table-box bf-dumps-table">
+      <div class="bf-table-box bf-cvv-table">
         <ul class="bf-table-items-row popular-tag-items">
           {% for purchase in purchases %}
           <li class="bf-table-item-row">
@@ -120,7 +120,7 @@
               <div class="bf-table-cell">
                 <span><small>Name</small> {{purchase.name}}</span>
               </div>
-              <div class="bf-table-cell">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.DOB}}">
                 <span><small>DOB</small> {{purchase.DOB}} </span>
               </div>
               <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.category}}">
@@ -171,16 +171,16 @@
                 <span><small>Country</small>{{purchase.country}}</span>
               </div>
               <div class="bf-table-cell">
-                <span><small>Email</small>{% if purchase.email != None %}✅{% else %}❌{% endif %}</span>
+                <span><small>Email</small>{{purchase.email }}</span>
               </div>
               <div class="bf-table-cell">
-                <span><small>Phone</small>{% if purchase.phone_number != None %}✅{% else %}❌{% endif %}</span>
+                <span><small>Phone</small>{{purchase.phone_number }}</span>
               </div>
               <div class="bf-table-cell">
-                <span><small>SSN</small>{% if purchase.ssn != None %}✅{% else %}❌{% endif %}</span>
+                <span><small>SSN</small>{{purchase.ssn }}</span>
               </div>
               <div class="bf-table-cell">
-                <span><small>DOB</small>{% if purchase.dob != None %}✅{% else %}❌{% endif %}</span>
+                <span><small>DOB</small>{{purchase.dob }}</span>
               </div>
               {% elif purchase.product == "DUMPS" %}
               <div class="bf-table-cell">

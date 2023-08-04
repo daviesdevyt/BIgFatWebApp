@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
+from utils.helpers import get_cc_status
 from utils.oxapay import Oxapay
 from authentication.models import User
 from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services, Order
@@ -90,12 +91,15 @@ def verify_tx(request):
 
 @login_required
 def checkout(request):
-    if len(request.user.cart) > 0:
+    cart = CartProduct.objects.filter(user=request.user)
+    if len(cart) > 0:
         orders = []
         total = 0
-        for item in request.user.cart:
-            total += item.get_data().price
+        for item in cart:
+            i = item.get_data()
+            total += i.price
             orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
+        print(total, request.user.balance)
         if total > request.user.balance:
             # TODO: Alert no enough balance
             return redirect("cart")

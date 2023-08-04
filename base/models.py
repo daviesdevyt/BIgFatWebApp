@@ -22,7 +22,7 @@ class News(BaseModel):
         verbose_name_plural = "News"
 
 class Product(BaseModel):
-    delivered_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    delivered_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     extra = models.TextField(null=True, blank=True)
 
     class Meta:
@@ -111,5 +111,7 @@ class Order(BaseModel):
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
         obj = data[self.product].objects.get(id=self.product_id)
+        obj.delivered_to = self.user
+        obj.save()
         obj.product = self.product.upper()
         return obj
