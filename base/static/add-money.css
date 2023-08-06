@@ -1,0 +1,10 @@
+#input-calc {
+    margin: 10px;
+}
+form button {
+    padding: 7px;
+    border-radius: 10px;
+    background-color: #7b6ad6;
+    color: white;
+    width: 100px;
+}

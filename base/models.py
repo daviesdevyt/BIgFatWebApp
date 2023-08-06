@@ -143,9 +143,9 @@ class Order(BaseModel):
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
         obj = data[self.product].objects.get(id=self.product_id)
-        obj.purchased = True
+        if self.product not in ["guides", "services"]:
+            obj.purchased = True
         obj.save()
-        data = model_to_dict(obj, exclude=["id", "purchased", "date_created"])
         data = str(serialize("json", [obj]))
         data = json.loads(data)[0]["fields"]
         data.pop("date_created")
