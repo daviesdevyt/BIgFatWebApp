@@ -43,6 +43,7 @@
   <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
 	<script src="/static/cart.js"></script>
+  <link rel="stylesheet" href="/static/fullz.css">
 </head>
 
 <body>
@@ -127,11 +128,11 @@
           {% for fullz in fullzz %}
           <li class="bf-table-item-row">
             <div class="bf-table-items">
-              <div class="bf-table-cell">
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.name}}">
                 <span><small>Name</small> {{fullz.name}}</span>
               </div>
-              <div class="bf-table-cell">
-                <span><small>DOB</small> {{fullz.DOB}} </span>
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.DOB}}">
+                <span><small>DOB</small> {{ fullz.DOB|date:"SHORT_DATE_FORMAT" }} </span>
               </div>
               <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.category}}">
                 <span><small>Category</small> {{fullz.category}}</span>

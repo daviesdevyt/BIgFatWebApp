@@ -1,0 +1,15 @@
+.bf-dumps-table .bf-table-cell {
+  width: 7%;
+}
+.bf-dumps-table .bf-table-cell:nth-child(7) {
+  width: 16%;
+}
+.bf-dumps-table .bf-table-cell:nth-child(7) {
+  width: 12%;
+}
+.bf-dumps-table .bf-table-cell:nth-child(5) {
+  width: 7%;
+}
+.bf-dumps-table .bf-table-cell:nth-child(10) {
+  width: 5%;
+}
