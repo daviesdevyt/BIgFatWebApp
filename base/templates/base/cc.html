@@ -113,15 +113,13 @@
 		<div class="bf-article-inner">
 			<div class="bf-table-box bf-cvv-table">
 				<div class="bf-table-header">
+					<div class="bf-table-cell"><span>CC Type</span></div>
 					<div class="bf-table-cell"><span>CC</span></div>
 					<div class="bf-table-cell"><span>Exp</span></div>
-					<div class="bf-table-cell"><span>CVV</span></div>
-					<div class="bf-table-cell"><span>Name</span></div>
-					<div class="bf-table-cell"><span>Address</span></div>
-					<div class="bf-table-cell"><span>City</span></div>
+					<div class="bf-table-cell"><span>Base</span></div>
+					<div class="bf-table-cell"><span>Country</span></div>
 					<div class="bf-table-cell"><span>State</span></div>
 					<div class="bf-table-cell"><span>ZIP</span></div>
-					<div class="bf-table-cell"><span>Country</span></div>
 					<div class="bf-table-cell"><span>Email</span></div>
 					<div class="bf-table-cell"><span>Phone</span></div>
 					<div class="bf-table-cell"><span>SSN</span></div>
@@ -133,35 +131,29 @@
 
 			<div class="bf-table-box bf-cvv-table">
 				<ul class="bf-table-items-row popular-tag-items">
-					{% for cc in ccs%}
+					{% for cc in ccs %}
 					<li class="bf-table-item-row">
 						<div class="bf-table-items">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc_type}}">
+								<span><small>CC Type</small>{{cc.cc_type}}</span>
+							</div>
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc}}">
-								<span><small>CC</small>{{cc.cc}}</span>
+								<span><small>CC</small>{{cc.cc|truncatechars:6}}</span>
 							</div>
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{ cc.month|stringformat:'02d' }}/{{cc.year|stringformat:'02d'}}">
 								<span><small>Exp</small>{{ cc.month|stringformat:"02d" }}/{{cc.year|stringformat:"02d"}}</span>
 							</div>
-							<div class="bf-table-cell">
-								<span><small>CVV</small>{{cc.cvv}}</span>
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{ cc.base.name }}">
+								<span><small>Base</small>{{ cc.base.name }}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.name}}">
-								<span><small>Name</small>{{cc.name}}</span>
-							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.address}}">
-								<span><small>Address</small>{{cc.address}}</span>
-							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.city}}">
-								<span><small>City</small>{{cc.city}}</span>
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.country}}">
+								<span><small>Country</small>{{cc.country}}</span>
 							</div>
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.state}}">
 								<span><small>State</small>{{cc.state}}</span>
 							</div>
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.zip}}">
 								<span><small>ZIP</small>{{cc.zip}}</span>
-							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.country}}">
-								<span><small>Country</small>{{cc.country}}</span>
 							</div>
 							<div class="bf-table-cell">
 								<span><small>Email</small>{% if cc.email != None %}✅{% else %}❌{% endif %}</span>

@@ -1,14 +1,19 @@
-from django.db import models
-from authentication.models import User
 import uuid
 
+from django.db import models
+
+from authentication.models import User
 # Create your models here.
+from utils.constants import CreditCard
+
+
 class BaseModel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         abstract = True
+
 
 class News(BaseModel):
     title = models.CharField(max_length=100)
@@ -17,7 +22,7 @@ class News(BaseModel):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         verbose_name_plural = "News"
 
@@ -25,10 +30,12 @@ class News(BaseModel):
 class CCBase(BaseModel):
     name = models.CharField(max_length=255)
 
+
 class CC(BaseModel):
     base = models.ForeignKey(CCBase, on_delete=models.CASCADE, null=True)
     cc = models.CharField(max_length=16)
     month = models.IntegerField()
+    cc_type = models.CharField(max_length=255, choices=CreditCard.choices, default=CreditCard.choices[0][0])
     year = models.IntegerField()
     cvv = models.IntegerField()
     name = models.CharField(max_length=255)
@@ -46,6 +53,7 @@ class CC(BaseModel):
     purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
 
+
 class Fullz(BaseModel):
     name = models.CharField(max_length=255)
     DOB = models.DateField(null=True, blank=True)
@@ -59,18 +67,21 @@ class Fullz(BaseModel):
     purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
 
+
 class Dumps(BaseModel):
     bin = models.CharField(max_length=255)
     code = models.CharField(max_length=255)
-    cc_type = models.CharField(max_length=255, choices=(("Visa", "Visa"), ("Mastercard", "Mastercard"), ("Amex", "Amex"), ("Discover", "Discover"), ("JCB", "JCB"), ("Diners Club", "Diners Club")))
+    cc_type = models.CharField(max_length=255, choices=CreditCard.choices)
     country = models.CharField(max_length=255)
     bank = models.CharField(max_length=255)
     description = models.TextField()
     price = models.FloatField()
     purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name_plural = "Dumps"
+
 
 class Logs(BaseModel):
     title = models.CharField(max_length=255)
@@ -79,8 +90,10 @@ class Logs(BaseModel):
     price = models.FloatField()
     purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name_plural = "Logs"
+
 
 class Guides(BaseModel):
     title = models.CharField(max_length=255)
@@ -89,8 +102,10 @@ class Guides(BaseModel):
     price = models.FloatField()
     purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name_plural = "Guides"
+
 
 class Services(BaseModel):
     title = models.CharField(max_length=255)
@@ -99,8 +114,10 @@ class Services(BaseModel):
     price = models.FloatField()
     purchased = models.BooleanField(default=False)
     extra = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name_plural = "Services"
+
 
 class CartProduct(BaseModel):
     product = models.CharField(max_length=64)
@@ -114,6 +131,7 @@ class CartProduct(BaseModel):
         obj.cart_id = self.id
         return obj
 
+
 class Order(BaseModel):
     product = models.CharField(max_length=64)
     product_id = models.UUIDField()
@@ -122,7 +140,7 @@ class Order(BaseModel):
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
         obj = data[self.product].objects.get(id=self.product_id)
-        obj.delivered_to = self.user
+        obj.purchased = True
         obj.save()
         obj.product = self.product.upper()
         return obj
