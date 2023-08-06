@@ -1,227 +1,110 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="canonical" href="/" />
+    <title>Account Purchases</title>
 
-  <link rel="canonical" href="/" />
-  <title>Purchases</title>
+    <base href="." />
 
-  
-  <base href="." />
+    <meta name="viewport"
+        content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
 
-  <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <link rel="apple-touch-icon" sizes="180x180"
+        href="/static/logo.webp" />
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="/static/logo.webp" />
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="/static/logo.webp" />
+    <link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="format-detection" content="address=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-touch-fullscreen" content="yes" />
-  <link rel="apple-touch-icon" sizes="180x180"
-    href="/static/logo.webp" />
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="/static/logo.webp" />
-  <link rel="icon" type="image/png" sizes="16x16"
-    href="/static/logo.webp" />
-  <link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
-  <meta name="msapplication-TileColor" content="#da532c" />
-  <meta name="theme-color" content="#ffffff" />
-
-  <link rel="stylesheet" href="/static/1ec244110cbe26f19dafa6e2b268083c-1-1.css" as="style"
-    onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
-    media="screen" />
-  <link rel="stylesheet" media="screen" href="/static/1ec244110cbe26f19dafa6e2b268083c-1-1.css"
-    crossorigin="anonymous" />
-  <link rel="stylesheet" href="/static/css2" as="style"
-    onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
-    media="screen" />
-  <link rel="stylesheet" media="screen" href="/static/css2" crossorigin="anonymous" />
-  <script src="/static/jquery.min.js.download" crossorigin="anonymous"></script>
-  <script src="/static/feather.min.js.download" crossorigin="anonymous"></script>
-  <script src="/static/js.cookie.min.js.download" async="" crossorigin="anonymous"></script>
-  <script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
-  <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
-  <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
-  <script src="/static/cart.js"></script>
+    <link rel="stylesheet" href="/static/61ad427ae611110d9f02176ddcad45ae-1-1.css" as="style"
+        onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+        media="screen" />
+    <link rel="stylesheet" media="screen" href="/static/61ad427ae611110d9f02176ddcad45ae-1-1.css"
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="/static/css2" as="style"
+        onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+        media="screen" />
+    <link rel="stylesheet" media="screen" href="/static/css2" crossorigin="anonymous" />
+    <script src="/static/jquery.min.js.download" crossorigin="anonymous"></script>
+    <script src="/static/feather.min.js.download" crossorigin="anonymous"></script>
+    <script src="/static/js.cookie.min.js.download" async="" crossorigin="anonymous"></script>
+    <script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
+    <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
+    <script src="/static/92fb9581c692b76215e857ec6376c303-1-1.js.download" async="" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  {% include 'base/header.html' %}
-  <div class="bf-article-page">
-    <div class="bf-article-page-headbox">
-      <div class="bf-article-page-headbox-overflow">
-        <div class="bf-article-headbox-left">
-          <ol class="bf-breadcrumb">
-            <li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
-            <li class="bf-breadcrumb-item"><a href="/purchases">Purchases</a></li>
-          </ol>
-        </div>
-
-        <div class="bf-headbox-right">
-          <div class="bf-table-display-style"><i class="button-rows"></i><i class="button-columns"></i></div>
-          <div class="bf-filter-button check">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="feather feather-sliders">
-              <line x1="4" y1="21" x2="4" y2="14"></line>
-              <line x1="4" y1="10" x2="4" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="12"></line>
-              <line x1="12" y1="8" x2="12" y2="3"></line>
-              <line x1="20" y1="21" x2="20" y2="16"></line>
-              <line x1="20" y1="12" x2="20" y2="3"></line>
-              <line x1="1" y1="14" x2="7" y2="14"></line>
-              <line x1="9" y1="8" x2="15" y2="8"></line>
-              <line x1="17" y1="16" x2="23" y2="16"></line>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <div class="bf-filter-all-selects visible overflow-visible">
-        <div id="ocfilter-button">
-          <button class="btn btn-default" data-loading-text=""></button>
-        </div>
-        <script>
-          var data_php = {
-            searchButton: 1,
-            showPrice: 0,
-            showCounter: 1,
-            manualPrice: 0,
-            link: "/purchases",
-            path: "59",
-            limit: 0,
-            params: "",
-            index: "filter_ocfilter",
-          };
-
-          var data_text = {
-            show_all: "Show all",
-            hide: "Hide",
-            load: "Loading...",
-            any: "All",
-            select: "Products not found",
-          };
-        </script>
-      </div>
-    </div>
-
-    <div class="bf-article-inner">
-
-      <div class="bf-table-box bf-cvv-table">
-        <ul class="bf-table-items-row popular-tag-items">
-          {% for purchase in purchases %}
-          <li class="bf-table-item-row">
-            <div class="bf-table-items">
-              <div class="bf-table-cell">
-                <span><small>Type</small> {{purchase.product}}</span>
-              </div>
-              {% if purchase.product == 'FULLZ' %}
-              <div class="bf-table-cell">
-                <span><small>Name</small> {{purchase.name}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.DOB}}">
-                <span><small>DOB</small> {{purchase.DOB}} </span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.category}}">
-                <span><small>Category</small> {{purchase.category}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.country}}">
-                <span><small>Country</small>{{purchase.country}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>State</small>{{purchase.state}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.city}}">
-                <span><small>City</small>{{purchase.city}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.zip}}">
-                <span><small>ZIP</small>{{purchase.zip}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.description}}">
-                <span><small>Description</small>{{purchase.description}}</span>
-              </div>
-              {% elif purchase.product == "CC" %}
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.cc}}">
-                <span><small>CC</small>{{purchase.cc}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext"
-                data-title="{{ purchase.month|stringformat:'02d' }}/{{purchase.year|stringformat:'02d'}}">
-                <span><small>Exp</small>{{ purchase.month|stringformat:"02d"}}/{{purchase.year|stringformat:"02d"}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>CVV</small>{{purchase.cvv}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.name}}">
-                <span><small>Name</small>{{purchase.name}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.address}}">
-                <span><small>Address</small>{{purchase.address}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.city}}">
-                <span><small>City</small>{{purchase.city}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.state}}">
-                <span><small>State</small>{{purchase.state}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.zip}}">
-                <span><small>ZIP</small>{{purchase.zip}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.country}}">
-                <span><small>Country</small>{{purchase.country}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>Email</small>{{purchase.email }}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>Phone</small>{{purchase.phone_number }}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>SSN</small>{{purchase.ssn }}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>DOB</small>{{purchase.dob }}</span>
-              </div>
-              {% elif purchase.product == "DUMPS" %}
-              <div class="bf-table-cell">
-                <span><small>Bin</small> {{purchase.bin}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>Code</small> {{purchase.code}} </span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.cc_type}}">
-                <span><small>CC Type</small> {{purchase.cc_type}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.country}}">
-                <span><small>Country</small>{{purchase.country}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>Bank</small>{{purchase.bank}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.description}}">
-                <span><small>Description</small>{{purchase.description}}</span>
-              </div>
-              {% elif purchase.product == 'LOGS' or purchase.product == 'GUIDES' or purchase.product == 'SERVICES' %}
-              <div class="bf-table-cell">
-                <span><small>Bin</small> {{purchase.title}}</span>
-              </div>
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{purchase.description}}">
-                <span><small>Description</small>{{purchase.description}}</span>
-              </div>
-              <div class="bf-table-cell">
-                <span><small>Category</small>{{purchase.category}}</span>
-              </div>
-              {% endif %}
-              <div class="bf-table-cell">
-                <span><small>Extra</small>{{purchase.extra}}</span>
-              </div>
+    {% include 'base/header.html' %}
+    <div class="bf-article-page">
+        <div class="bf-article-page-headbox">
+            <div class="bf-article-page-headbox-overflow">
+                <div class="bf-article-headbox-left">
+                    <ol class="bf-breadcrumb">
+                        <li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
+                        <li class="bf-breadcrumb-item"><a href="/purchases">Purchases</a></li>
+                    </ol>
+                </div>
             </div>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
+        </div>
+
+        <div class="bf-article-inner">
+            <div class="bf-table-box bf-purchases-table">
+                <div class="bf-table-header">
+                    <div class="bf-table-cell"><span>Order ID</span></div>
+                    <div class="bf-table-cell"><span>Name</span></div>
+                    <div class="bf-table-cell"><span>Date</span></div>
+                    <div class="bf-table-cell"><span>Details</span></div>
+                </div>
+            </div>
+
+            <div class="bf-table-box bf-purchases-table">
+                <ul class="bf-table-items-row popular-tag-items" data-jplist-group="group1">
+                    {% for order in orders %}
+                    <li class="bf-table-item-row" data-jplist-item="">
+                        <div class="bf-table-items">
+                            <div class="bf-table-cell">
+                                <span><small>Order ID</small>{{order.id}}</span>
+                            </div>
+                            <div class="bf-table-cell">
+                                <span><small>Name</small>{{order.product}}</span>
+                            </div>
+                            <div class="bf-table-cell">
+                                <span><small>Date</small>{{order.date_created}}</span>
+                            </div>
+                            <div class="bf-table-cell">
+                                <span><small>Details</small>
+                                    <p id="order_download_id_739872">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="feather feather-copy bf-copy-text"
+                                            onclick="to_clipboard(&#39;order_download_id_739872&#39;)">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                        <pre>
+                                            {{ order.data }}
+                                        </pre>
+                                    </p>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
-  </div>
 
 </body>
+
 </html>
