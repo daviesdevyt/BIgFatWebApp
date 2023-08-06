@@ -45,6 +45,7 @@
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
 	<script src="/static/cart.js"></script>
+	<link rel="stylesheet" href="/static/cc.css">
 </head>
 
 <body>
@@ -137,7 +138,7 @@
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc_type}}">
 								<span><small>CC Type</small>{{cc.cc_type}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc}}">
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc|truncatechars:6}}">
 								<span><small>CC</small>{{cc.cc|truncatechars:6}}</span>
 							</div>
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{ cc.month|stringformat:'02d' }}/{{cc.year|stringformat:'02d'}}">

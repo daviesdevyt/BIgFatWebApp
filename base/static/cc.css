@@ -1,0 +1,12 @@
+.bf-table-box.bf-cvv-table .bf-table-cell:first-child, .bf-table-box.bf-cvv-table .bf-table-cell:last-child
+{
+    width: 7%;
+}
+.bf-table-box.bf-cvv-table .bf-table-cell:nth-child(4)
+{
+    width: 10%;
+}
+.bf-table-box.bf-cvv-table .bf-table-cell
+{
+    width: 6%;
+}
