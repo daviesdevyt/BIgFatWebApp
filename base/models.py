@@ -1,3 +1,5 @@
+import json
+from django.core.serializers import serialize
 import uuid
 
 from django.db import models
@@ -143,6 +145,12 @@ class Order(BaseModel):
         obj = data[self.product].objects.get(id=self.product_id)
         obj.purchased = True
         obj.save()
-        obj.data = model_to_dict(obj, exclude=["id", "purchased", "date_created"])
+        data = model_to_dict(obj, exclude=["id", "purchased", "date_created"])
+        data = str(serialize("json", [obj]))
+        data = json.loads(data)[0]["fields"]
+        data.pop("date_created")
+        data.pop("purchased")
+        data.pop("base", None)
+        obj.data = str(data).replace("'", '').replace(", ", "\n").replace("{", "").replace("}", "")
         obj.product = self.product.upper()
         return obj

@@ -68,7 +68,7 @@
 
             <div class="bf-table-box bf-purchases-table">
                 <ul class="bf-table-items-row popular-tag-items" data-jplist-group="group1">
-                    {% for order in orders %}
+                    {% for order in purchases %}
                     <li class="bf-table-item-row" data-jplist-item="">
                         <div class="bf-table-items">
                             <div class="bf-table-cell">
@@ -83,15 +83,7 @@
                             <div class="bf-table-cell">
                                 <span><small>Details</small>
                                     <p id="order_download_id_739872">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-copy bf-copy-text"
-                                            onclick="to_clipboard(&#39;order_download_id_739872&#39;)">
-                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                        </svg>
-                                        <pre>{{ order.data }}<br>Extra>: {{order.extra}}</pre>
+                                        <pre>{{ order.data }}</pre>
                                     </p>
                                 </span>
                             </div>
