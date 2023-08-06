@@ -1,4 +1,3 @@
-import json
 import uuid
 
 from django.db import models
@@ -6,6 +5,7 @@ from django.db import models
 from authentication.models import User
 # Create your models here.
 from utils.constants import CreditCard
+from django.forms.models import model_to_dict
 
 
 class BaseModel(models.Model):
@@ -143,6 +143,6 @@ class Order(BaseModel):
         obj = data[self.product].objects.get(id=self.product_id)
         obj.purchased = True
         obj.save()
-        obj.data = json.dumps(obj.__dict__).replace(", ", "\n").replace("{", "").replace("}", "").replace('"', "")
+        obj.data = model_to_dict(obj, exclude=["id", "purchased", "date_created"])
         obj.product = self.product.upper()
         return obj
