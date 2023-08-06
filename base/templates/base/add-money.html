@@ -96,6 +96,7 @@
 							<h2>Add funds to balance of {{ request.user.username }}</h2>
 							{% if request.user.pay_link %}
 							<p>Please click the link to add balance</p>
+							<p>⚠ ️Please, send the exact amount stated or your transaction won't be valid</p>
 							<br>
 							<a href="{{request.user.pay_link}}" target="_blank">
 								<h2>{{request.user.pay_link}}</h2>
