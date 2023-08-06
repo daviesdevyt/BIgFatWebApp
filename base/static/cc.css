@@ -4,7 +4,15 @@
 }
 .bf-table-box.bf-cvv-table .bf-table-cell:nth-child(4)
 {
-    width: 10%;
+    width: 12%;
+}
+.bf-table-box.bf-cvv-table .bf-table-cell:nth-child(6)
+{
+    width: 6%;
+}
+.bf-table-box.bf-cvv-table .bf-table-cell:nth-child(8)
+{
+    width: 6%;
 }
 .bf-table-box.bf-cvv-table .bf-table-cell
 {
