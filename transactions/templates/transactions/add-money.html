@@ -38,7 +38,7 @@
 	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/92fb9581c692b76215e857ec6376c303-1-1.js.download" async="" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="/static/add-money.css">
+	<link rel="stylesheet" href="/static/add-money.css" />
 	<script src="/static/add-money.js"></script>
 </head>
 
@@ -94,42 +94,77 @@
 								Balance: <strong><span id="value-balance">$ {{request.user.balance}}</span></strong>
 							</div>
 
-							{% if request.user.pay_id %}
-							{% for token, address in addresses %}
+							{% if request.user.pay_id %} {% for token, address in addresses %}
 							<div class="bf-payment-wallet-key">
 								<div class="bf-payment-wallet-title-text">{{token|title}} Address</div>
-								<div class="bf-my-wallet-overflow" onclick="to_clipboard('{{address}}', '', 'Copied the wallet: ')">
+								<div class="bf-my-wallet-overflow"
+									onclick="to_clipboard('{{address}}', '', 'Copied the wallet: ')">
 									<div class="my-wallet" id="{{address}}">{{address}}</div>
-									<button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+									<button>
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+											stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy">
+											<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+											<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+										</svg>
+									</button>
 								</div>
 							</div>
 							{% endfor %}
-							<br>
+							<br />
 							<h2>Status: <span id="tx-status">{{tx.status}}</span></h2>
-							<button data-pay-id="{{request.user.pay_id}}" id="input-calc" class="verify-payment">Verify
-							</button>
+							<button data-pay-id="{{request.user.pay_id}}" id="input-calc"
+								class="verify-payment">Verify</button>
 							{% else %}
 							<form action="" method="post">
 								{% csrf_token %}
-								<button id="input-calc" class="start-payment">
-									Start Payment
-								</button>	
+								<button id="input-calc" class="start-payment">Start Payment</button>
 							</form>
 							{% endif %}
 						</div>
 					</div>
-
-					<div id="table-transactions" class="bf-transaction-information div-data" style="display: none"
-						data-testnet="" data-datetime="2023-07-28 19:56:38" data-txw="">
-						<div class="bf-transaction-table bf-head-table">
-							<div class="bf-transaction-table-column"><span>Transations</span></div>
-							<div class="bf-transaction-table-column"><span>Amount</span></div>
-							<div class="bf-transaction-table-column"><span>Rate</span></div>
-							<div class="bf-transaction-table-column"><span>Sum</span></div>
-							<div class="bf-transaction-table-column"><span>Confirm</span></div>
-						</div>
-					</div>
 				</div>
+			</div>
+		</div>
+		<div class="bf-article-inner">
+			<div class="bf-table-box bf-addmoney-table">
+				<div class="bf-table-header">
+					<div class="bf-table-cell"><span>Date added</span></div>
+					<div class="bf-table-cell"><span>Amount</span></div>
+					<div class="bf-table-cell"><span>Transition Status</span></div>
+					<div class="bf-table-cell"><span> </span></div>
+				</div>
+			</div>
+			<div class="bf-table-box bf-addmoney-table">
+				<ul class="bf-table-items-row popular-tag-items" data-jplist-group="group1">
+					{% for tx in txs %}
+					<li class="bf-table-item-row" data-jplist-item="">
+						<div class="bf-table-items">
+							<div class="bf-table-cell">
+								<span><small>Date added:</small> {{tx.date_created}}</span>
+							</div>
+							<!-- <div class="bf-table-cell">
+								<span><small>ID:</small> <a class="order_view" href="">ID: {{tx.pay_id}}</a></span>
+							</div> -->
+							<div class="bf-table-cell">
+								<span><small>Amount:</small>
+									{% if tx.amount %}
+									<span class="text-plus">$ {{tx.amount}}</span>
+									{% else %}
+									<span class="">No amount yet</span>
+									{% endif %}
+								</span>
+							</div>
+							<div class="bf-table-cell" data-title="">
+								<span class=""><small>Transition Status</small> {{tx.status}}</span>
+							</div>
+							<div class="bf-table-cell" data-title="">
+								<span><small></small> <a href="/transactions#" class="verify-payment" data-pay-id="{{tx.pay_id}}">Refresh</a></span>
+							</div>
+						</div>
+					</li>
+					{% endfor %}
+				</ul>
 			</div>
 		</div>
 	</div>

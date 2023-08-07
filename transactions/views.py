@@ -31,7 +31,7 @@ def wallet(request):
         expiry_raw = res["data"]["expires_at"].replace("Z", "")
         expiry = datetime.fromisoformat(expiry_raw).strftime("%B %d, %I:%M %p")
     
-    context = {"addresses": addresses.items(), "expiry": expiry, "tx": tx} if res else {}
+    context = {"addresses": addresses.items(), "expiry": expiry, "tx": tx, "txs": request.user.transactions.order_by("-date_created")} if res else {}
     return render(request, 'transactions/add-money.html', context)
 
 @login_required

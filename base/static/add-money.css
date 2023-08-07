@@ -1,10 +1,27 @@
 #input-calc {
-    margin: 10px;
+  margin: 10px;
 }
-form button, .verify-payment {
-    padding: 7px;
-    border-radius: 10px;
-    background-color: #7b6ad6;
-    color: white;
-    width: 100px;
+form button,
+.verify-payment {
+  padding: 7px;
+  border-radius: 10px;
+  background-color: #7b6ad6;
+  color: white;
+  width: 100px;
+}
+.bf-article-inner {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+@media screen and (min-width: 980px) {
+  .bf-table-box.bf-addmoney-table .bf-table-cell {
+    width: 29%;
+  }
+  .bf-table-box.bf-addmoney-table .bf-table-cell:nth-child(4) {
+    width: 13%;
+  }
+  .bf-payment-block {
+    min-width: 670px;
+  }
 }

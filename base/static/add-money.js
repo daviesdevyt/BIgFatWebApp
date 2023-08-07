@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    function handleButtonPress() {
+    function handleButtonPress(event) {
+        event.preventDefault();
         var pay_id = $(this).data('pay-id');
         $.get(`/verify/${pay_id}`, function (response) {
             $("#tx-status").html(response)
