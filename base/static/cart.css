@@ -1,0 +1,14 @@
+@media screen and (min-width: 980px) {
+  .bf-table-box.bf-cart-table .bf-table-cell:nth-child(2) {
+    width: 30%;
+  }
+  .bf-table-box.bf-cart-table .bf-table-cell:nth-child(4) {
+    width: 7%;
+  }
+  .bf-table-box.bf-cart-table .bf-table-cell:nth-child(5) {
+    width: 7%;
+  }
+  .bf-table-box.bf-cart-table .bf-table-cell:nth-child(6) {
+    width: 10%;
+  }
+}

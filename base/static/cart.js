@@ -7,6 +7,8 @@ $(document).ready(function () {
         }).fail(function (xhr, status, error) {
             alert("Failed to add to cart")
             console.log('Error:', status, error);
+        }).done(function (response) {
+            $(".cart-count").html(response)
         });
     }
 

@@ -1,15 +1,17 @@
-.bf-dumps-table .bf-table-cell {
-  width: 7%;
-}
-.bf-dumps-table .bf-table-cell:nth-child(1) {
-  width: 10%;
-}
-.bf-dumps-table .bf-table-cell:nth-child(7) {
-  width: 7.7%;
-}
-.bf-dumps-table .bf-table-cell:nth-child(5) {
-  width: 7%;
-}
-.bf-dumps-table .bf-table-cell:nth-child(10) {
-  width: 5%;
+@media screen and (min-width: 980px) {
+  .bf-dumps-table .bf-table-cell {
+    width: 7%;
+  }
+  .bf-dumps-table .bf-table-cell:nth-child(1) {
+    width: 10%;
+  }
+  .bf-dumps-table .bf-table-cell:nth-child(7) {
+    width: 7.7%;
+  }
+  .bf-dumps-table .bf-table-cell:nth-child(5) {
+    width: 7%;
+  }
+  .bf-dumps-table .bf-table-cell:nth-child(10) {
+    width: 5%;
+  }
 }

@@ -86,7 +86,7 @@ def delete_cart(request, prod_id):
 @login_required
 def add_cart(request, type, prod_id):
     CartProduct.objects.create(product=type, product_id=prod_id, user=request.user)
-    return HttpResponse(status=200)
+    return HttpResponse(request.user.cart.count(), status=200)
 
 
 @login_required

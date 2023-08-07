@@ -1,6 +1,8 @@
-.bf-dumps-table .bf-table-cell {
-  width: 16%;
-}
-.bf-dumps-table .bf-table-cell:nth-child(6) {
-  width: 16%;
+@media screen and (min-width: 980px) {
+  .bf-dumps-table .bf-table-cell {
+    width: 16%;
+  }
+  .bf-dumps-table .bf-table-cell:nth-child(6) {
+    width: 16%;
+  }
 }
