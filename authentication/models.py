@@ -4,5 +4,4 @@ from django.db import models
 
 class User(AbstractUser):
     balance = models.FloatField(default=0)
-    pay_link = models.CharField(max_length=255, null=True, blank=True)
-    pass
+    pay_id = models.CharField(max_length=255, null=True, blank=True, default=None)

@@ -4,9 +4,10 @@ class CreditCard:
         ("Diners Club", "Diners Club"))
 
 class TransactionStatus:
-    pending = "Pending"
-    cancelled = "Cancelled"
-    completed = "Completed"
+    PENDING = "PENDING"
+    CANCELLED= "CANCELLED"
+    CONFIRMED = "CONFIRMED"
+    EXPIRED = "EXPIRED"
     choices = (
-        (pending, "Pending"), (cancelled, "Cancelled"), (completed, "Completed")
+        (PENDING, "PENDING"), (CANCELLED, "CANCELLED"), (CONFIRMED, "CONFIRMED")
     )

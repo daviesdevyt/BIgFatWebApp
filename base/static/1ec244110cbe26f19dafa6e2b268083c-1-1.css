@@ -2075,7 +2075,7 @@ body.bf-view-navigation .bf-main-menu-button:hover:after,
   margin: -12px 0 0 -7.5px;
   cursor: pointer;
 }
-#my-wallet {
+.my-wallet {
   color: #000;
   line-height: 18px;
   background: #fff;
@@ -2086,7 +2086,7 @@ body.bf-view-navigation .bf-main-menu-button:hover:after,
   overflow: visible;
   word-wrap: break-word;
 }
-.bf-add-money-my-bit-wallet #my-wallet {
+.bf-add-money-my-bit-wallet .my-wallet {
   border: 0;
   word-wrap: anywhere;
   margin-right: 45px;
@@ -3248,7 +3248,7 @@ body.bf-view-navigation .bf-main-menu-button:hover:after,
 .feather.feather-copy:hover {
   color: #7b6ad6;
 }
-.bf-my-wallet-overflow #my-wallet {
+.bf-my-wallet-overflow .my-wallet {
   border: 0;
   height: auto;
 }

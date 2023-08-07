@@ -1,7 +1,7 @@
 #input-calc {
     margin: 10px;
 }
-form button {
+form button, .verify-payment {
     padding: 7px;
     border-radius: 10px;
     background-color: #7b6ad6;

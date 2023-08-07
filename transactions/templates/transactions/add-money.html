@@ -1,4 +1,3 @@
-{% load filters %}
 <!DOCTYPE html>
 <html>
 
@@ -73,14 +72,13 @@
 					<div class="bf-payment-main-info">
 						<div class="bf-payment-left-column">
 							<div class="bf-payment-quarcode">
-								{% if request.user.pay_link %}
-								<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={{request.user.pay_link}}"
-									alt="{{request.user.pay_link}}" title="{{request.user.pay_link}}" />
+								{% if request.user.pay_id %}
+								<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data={{request.user.pay_id}}"
+									alt="{{request.user.pay_id}}" title="{{request.user.pay_id}}" />
 								{% else %}
 								<img
-									src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=SelectAPriceFirst" />
+									src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=Click-Start-Payment" />
 								{% endif %}
-
 							</div>
 
 							<div class="bf-loader-payment">
@@ -92,43 +90,31 @@
 
 						<div class="bf-payment-information-column">
 							<h2>Add funds to balance of {{ request.user.username }}</h2>
-							{% if request.user.pay_link %}
-							<p>Please click the link to add balance</p>
-							<p><i>
-									⚠ ️Please, send the exact amount stated or your transaction won't be valid
-								</i>
-							</p>
-							<br>
-							<a href="{{request.user.pay_link}}" target="_blank">
-								<h2>{{request.user.pay_link}}</h2>
-							</a>
-							{% else %}
-							<p>Select a price to pay in ($)</p>
-							{% endif %}
-							
 							<div class="bf-payments-balans">
 								Balance: <strong><span id="value-balance">$ {{request.user.balance}}</span></strong>
 							</div>
-							
-							<div class="bf-payment-money-information">
-								<form method="post" action="">
-									{% csrf_token %}
-									<div class="bf-payment-formula">
-										<input id="input-calc" name="amt" type="text" size="3" value="{{amt}}"
-											wfd-id="id0" />
-											<button type="submit" id="input-calc">
-												Set
-										</button>
-									</div>
-								</form>
+
+							{% if request.user.pay_id %}
+							{% for token, address in addresses %}
+							<div class="bf-payment-wallet-key">
+								<div class="bf-payment-wallet-title-text">{{token|title}} Address</div>
+								<div class="bf-my-wallet-overflow" onclick="to_clipboard('{{address}}', '', 'Copied the wallet: ')">
+									<div class="my-wallet" id="{{address}}">{{address}}</div>
+									<button><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-copy"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+								</div>
 							</div>
-							{% if request.user.pay_link %}
-							<h2 style="margin-left: 20px;">
-								Already paid? Click 
-								<a href="#" verify-tx data-track-id="{{request.user.pay_link|get_track_id}}">
-									Here
-								</a>
-							</h2>
+							{% endfor %}
+							<br>
+							<h2>Status: <span id="tx-status">{{tx.status}}</span></h2>
+							<button data-pay-id="{{request.user.pay_id}}" id="input-calc" class="verify-payment">Verify
+							</button>
+							{% else %}
+							<form action="" method="post">
+								{% csrf_token %}
+								<button id="input-calc" class="start-payment">
+									Start Payment
+								</button>	
+							</form>
 							{% endif %}
 						</div>
 					</div>

@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["cashflowcartel.club"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -136,4 +136,4 @@ STATIC_ROOT = '/home/static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-OXAPAY_MERCHANT = os.getenv("OXAPAY_MERCHANT")
+COINBASE_API_KEY = os.getenv("COINBASE_API_KEY")
