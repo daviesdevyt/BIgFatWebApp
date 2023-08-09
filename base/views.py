@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect
+from django.contrib import messages
 
 from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services, Order
 
@@ -21,7 +22,7 @@ def checkout(request):
             total += i.price
             orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
         if total > request.user.balance:
-            # TODO: Alert no enough balance
+            messages.error(request, "Insufficient balance")
             return redirect("cart")
         Order.objects.bulk_create(orders)
         empty_cart(request)
@@ -106,7 +107,7 @@ def checkout(request):
             total += i.price
             orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
         if total > request.user.balance:
-            # TODO: Alert no enough balance
+            messages.error(request, "Insufficient balance")
             return redirect("cart")
         Order.objects.bulk_create(orders)
         empty_cart(request)

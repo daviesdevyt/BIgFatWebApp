@@ -1,0 +1,9 @@
+<div id="messages">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="bf-article-inner flash-message {{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>

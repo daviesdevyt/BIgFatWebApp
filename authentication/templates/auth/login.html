@@ -72,6 +72,14 @@
       async=""
       crossorigin="anonymous"
     ></script>
+    <style>
+      .flash-message.error {
+        color: rgb(247, 44, 44);
+      }
+      .flash-message.success {
+        color: #3bb23b;
+      }
+    </style>
   </head>
 
   <body>
@@ -83,6 +91,14 @@
           >
         </div>
         <div class="bf-auth-content-block">
+          
+          {% if messages %}
+          {% for message in messages %}
+          <div class="bf-auth-area-block flash-message {{message.tags}}">
+            {{message}}
+          </div>
+          {% endfor %}
+          {% endif %}
           <form action="/auth/login/" id="loginForm" method="post" enctype="multipart/form-data" class="bf-auth-form" login-form>
             <div class="bf-auth-area-block">
               {% csrf_token %}
@@ -101,7 +117,7 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              <input name="username" type="text" value="" placeholder="Nickname" />
+              <input name="username" type="text" value="" placeholder="Nickname" required/>
             </div>
             <div class="bf-auth-area-block password">
               <svg
@@ -119,7 +135,7 @@
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
               </svg>
-              <input id="pass2" name="password" type="password" class="active" value="" placeholder="Password" />
+              <input id="pass2" name="password" type="password" class="active" value="" placeholder="Password" required/>
               <div class="group2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +189,7 @@
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
               </svg>
-              <input name="username" type="text" value="" placeholder="Nickname" />
+              <input name="username" type="text" value="" placeholder="Nickname" required/>
             </div>
             <div class="bf-auth-area-block password">
               <svg
@@ -191,7 +207,7 @@
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
-              <input id="pass3" name="password" type="password" class="active" value="" placeholder="Password" autocomplete="new-password" />
+              <input id="pass3" name="password" type="password" class="active" value="" placeholder="Password" autocomplete="new-password" required/>
               <div class="group3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -227,7 +243,7 @@
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
               </svg>
-              <input id="pass4" name="confirm" type="password" class="active" value="" placeholder="Password confirm" autocomplete="off" />
+              <input id="pass4" name="confirm" type="password" class="active" value="" placeholder="Password confirm" autocomplete="off" required />
               <div class="group4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

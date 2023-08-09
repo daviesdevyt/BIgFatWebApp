@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as login_user, logout as logout_user
 from django.contrib.auth.decorators import login_required
 from .models import User
+from django.contrib import messages
+
 
 # Create your views here.
 def login(request):
@@ -11,13 +13,11 @@ def login(request):
         remember = request.POST.get('remember_me')
         remember = remember == 'on'
         user = authenticate(request, username=username, password=password)
-        print(user)
         if user:
             login_user(request, user)
             return redirect('news')
         else:
-            # TODO: Alert Password or username not correct
-            pass
+            messages.error(request, "Username or password is incorrect")
     return render(request, 'auth/login.html')
 
 def signup(request):
@@ -25,13 +25,15 @@ def signup(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         password2 = request.POST.get('confirm')
-        if password == password2:
-            print(username, password, password2)
-            User.objects.create_user(username=username, password=password)
-            return render(request, 'auth/login.html')
+        if User.objects.filter(username=username).first():
+            messages.error(request, "User already exists")
         else:
-            # TODO: Passwords dont match
-            pass
+            if password == password2:
+                print(username, password, password2)
+                User.objects.create_user(username=username, password=password)
+                return render(request, 'auth/login.html')
+            else:
+                messages.error(request, "Passwords dont match")
     return render(request, 'auth/login.html')
 
 @login_required
@@ -43,7 +45,7 @@ def change_password(request):
             request.user.set_password(password1)
             return redirect("news")
         else:
-            # TODO: Alert Passwords dont match
+            messages.error(request, "Passwords dont match")
             pass
     return render(request, "auth/change-password.html")
 

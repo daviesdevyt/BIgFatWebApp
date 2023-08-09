@@ -124,7 +124,7 @@ class Services(BaseModel):
 
 class CartProduct(BaseModel):
     product = models.CharField(max_length=64)
-    product_id = models.UUIDField()
+    product_id = models.UUIDField(unique=True)
     user = models.ForeignKey(User, models.CASCADE, related_name="cart")
 
     def get_data(self):

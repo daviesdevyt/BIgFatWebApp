@@ -1,0 +1,9 @@
+.flash-message {
+  color: white;
+}
+.flash-message.error {
+  background-color: rgb(247, 44, 44);
+}
+.flash-message.success {
+  background-color: #3bb23b;
+}

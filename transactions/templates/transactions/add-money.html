@@ -40,6 +40,7 @@
 	<script src="/static/92fb9581c692b76215e857ec6376c303-1-1.js.download" async="" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="/static/add-money.css" />
 	<script src="/static/add-money.js"></script>
+	<link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body class="">
@@ -56,6 +57,7 @@
 				</div>
 			</div>
 		</div>
+		{% include 'base/messages.html' %}
 		<div class="bf-payment-page">
 			<div class="bf-payment-block">
 				<div class="bf-payment-header-block">
@@ -113,8 +115,8 @@
 							{% endfor %}
 							<br />
 							<h2>Status: <span id="tx-status">{{tx.status}}</span></h2>
-							<button data-pay-id="{{request.user.pay_id}}" id="input-calc"
-								class="verify-payment">Verify</button>
+							<a href="/verify/{{request.user.pay_id}}" id="input-calc"
+								class="verify-payment">Verify</a>
 							{% else %}
 							<form action="" method="post">
 								{% csrf_token %}
@@ -159,7 +161,7 @@
 								<span class=""><small>Transition Status</small> {{tx.status}}</span>
 							</div>
 							<div class="bf-table-cell" data-title="">
-								<span><small></small> <a href="/transactions#" class="verify-payment" data-pay-id="{{tx.pay_id}}">Refresh</a></span>
+								<span><small></small> <a href="/verify/{{tx.pay_id}}" class="verify-payment">Refresh</a></span>
 							</div>
 						</div>
 					</li>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.decorators import login_required
 from authentication.models import User
 from utils.constants import TransactionStatus
@@ -8,6 +8,7 @@ from .models import Transaction
 from django.conf import settings
 from datetime import datetime
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 
 # Create your views here.
@@ -38,22 +39,26 @@ def wallet(request):
 def verify_tx(request, pay_id):
     tx = get_object_or_404(Transaction, pay_id=pay_id, user=request.user)
     if tx.status == TransactionStatus.CONFIRMED:
-        return HttpResponse("Transaction already completed", status=200)
+        messages.success(request, "Transaction already completed")
+        return redirect("transactions")
     elif tx.status == TransactionStatus.EXPIRED:
-        return HttpResponse("Transaction Expired")
-    # TODO: Add flash messages
-    res = coinbase.get_charge(pay_id)
-    status = confirm_payment(res)
-    tx.status = status
-    tx.save()
-    if status == TransactionStatus.PENDING:
-        return HttpResponse("Transaction Pending")
-    elif status == TransactionStatus.CONFIRMED:
-        amt = float(res["data"]["payments"][0]["value"]["local"]["amount"])
-        user = User.objects.filter(id=request.user.id)
-        user.update(pay_id=None, balance=user.first().balance+amt)
-        return HttpResponse("Verified !", status=200)
-    elif status == TransactionStatus.EXPIRED:
-        User.objects.filter(id=request.user.id).update(pay_id=None)
-        return HttpResponse("Transaction Expired !", status=200)
-    return HttpResponse(tx.status, status=200)
+        messages.error(request, "Transaction Expired")
+        return redirect("transactions")
+    try:
+        res = coinbase.get_charge(pay_id)
+        status = confirm_payment(res)
+        tx.status = status
+        tx.save()
+        if status == TransactionStatus.PENDING:
+            messages.success(request, "Transaction Pending")
+        elif status == TransactionStatus.CONFIRMED:
+            amt = float(res["data"]["payments"][0]["value"]["local"]["amount"])
+            user = User.objects.filter(id=request.user.id)
+            user.update(pay_id=None, balance=user.first().balance+amt)
+            messages.success(request, "Transaction Verified!")
+        elif status == TransactionStatus.EXPIRED:
+            User.objects.filter(id=request.user.id).update(pay_id=None)
+            messages.error(request, "Transaction Expired")
+    except:
+        messages.error(request, "Something went wrong")
+    return redirect("transactions")

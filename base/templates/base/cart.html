@@ -46,6 +46,7 @@
 	<script src="/static/9e00fb18cf547f8953ab4aa24a81f4cd-1-1.js.download" async="" crossorigin="anonymous"></script>
 	<script src="/static/cart.js"></script>
 	<link rel="stylesheet" href="/static/cart.css">
+	<link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
@@ -75,7 +76,8 @@
 				</div>
 			</div>
 		</div>
-
+		{% include 'base/messages.html' %}
+		{% if cart|length > 0 %}
 		<div class="bf-article-inner hide_bases_all">
 			<div id="vars" style="display: none; position: absolute" data-check_all_price="2.30"></div>
 
@@ -130,12 +132,15 @@
 							</div>
 						</div>
 					</li>
-					{% empty %}
-					No items in cart
 					{% endfor %}
 				</ul>
 			</div>
 		</div>
+		{% else %}
+		<div class="bf-article-inner">
+			Your shopping cart is empty!
+		</div>
+		{% endif %}
 	</div>
 
 </body>
