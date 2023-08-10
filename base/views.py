@@ -1,7 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.core.cache import cache
 
+from utils.helpers import filter_objects
 from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services, Order
 
 
@@ -42,18 +44,27 @@ def support(request):
 
 @login_required
 def cc(request):
-    return render(request, "base/cc.html", {"ccs": CC.objects.filter(purchased=False).order_by("date_created")})
+    attrs = ["base", "country", "state"]
+    unique, filters = filter_objects(request, CC, attrs, "cc")
+    return render(request, "base/cc.html", {"ccs": CC.objects.filter(purchased=False, **filters).order_by("date_created"),
+                                            "filters": unique, "attrs": attrs})
 
 
 @login_required
 def fullz(request):
+    attrs = ["category", "country", "state"]
+    unique, filters = filter_objects(request, Fullz, attrs, "fullz")
     return render(request, "base/fullz.html",
-                  {"fullzz": Fullz.objects.filter(purchased=False).order_by("date_created")})
+                  {"fullzz": Fullz.objects.filter(purchased=False, **filters).order_by("date_created"),
+                   "filters": unique, "attrs": attrs})
 
 
 @login_required
 def dumps(request):
-    return render(request, "base/dumps.html", {"dumps": Dumps.objects.filter(purchased=False).order_by("date_created")})
+    attrs = ["cc_type", "code", "country", "bank"]
+    unique, filters = filter_objects(request, Dumps, attrs, "dumps")
+    return render(request, "base/dumps.html", {"dumps": Dumps.objects.filter(purchased=False, **filters).order_by("date_created"),
+                                               "filters": unique, "attrs": attrs})
 
 
 @login_required
@@ -61,8 +72,11 @@ def logs(request, title):
     if title not in ["logs", "guides", "services"]:
         return HttpResponse(status=404)
     classes = {"logs": Logs, "guides": Guides, "services": Services}
+    attrs = ["category"]
+    unique, filters = filter_objects(request, classes[title], attrs, title.lower())
     return render(request, "base/logs.html",
-                  {"data": classes[title].objects.filter(purchased=False).order_by("date_created"), "name": title})
+                  {"data": classes[title].objects.filter(purchased=False, **filters).order_by("date_created"), "name": title,
+                   "filters": unique, "attrs": attrs})
 
 
 @login_required

@@ -1,3 +1,4 @@
+{% load filters %}
 <!DOCTYPE html>
 <html>
 
@@ -7,7 +8,7 @@
   <link rel="canonical" href="/" />
   <title>Fullz</title>
 
-  
+
   <base href="." />
 
   <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
@@ -17,12 +18,9 @@
   <meta name="format-detection" content="address=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-touch-fullscreen" content="yes" />
-  <link rel="apple-touch-icon" sizes="180x180"
-    href="/static/logo.webp" />
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="/static/logo.webp" />
-  <link rel="icon" type="image/png" sizes="16x16"
-    href="/static/logo.webp" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/logo.webp" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/logo.webp" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/logo.webp" />
   <link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
   <meta name="msapplication-TileColor" content="#da532c" />
   <meta name="theme-color" content="#ffffff" />
@@ -42,9 +40,10 @@
   <script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
-	<script src="/static/cart.js"></script>
+  <script src="/static/cart.js"></script>
   <link rel="stylesheet" href="/static/fullz.css">
   <link rel="stylesheet" href="/static/style.css">
+  <script defer src="/static/filters.js"></script>
 </head>
 
 <body>
@@ -82,31 +81,59 @@
       <div class="bf-filter-all-selects visible overflow-visible">
         <div id="ocfilter-button">
           <button class="btn btn-default" data-loading-text=""></button>
-        </div>
-        <script>
+				</div>
+				<div id="ocfilter" class="panel ocfilter panel-default mobfill hidden-xs filter-wrapper-block">
+					<div class="bf-filter-all-select-items">
+            <ul class="bf-filter-items">
+              {% for attr in attrs %}
+							<li class="bf-filter-item-block filter-num-block checkbox-many">
+								<div class="bf-filter-item-box bf-filter-drop-list with-drop-select checkbox">
+									<div class="parent">
+										<input type="text" class="checkbox-many-input ocf-target input ajax-filter"
+                    autocomplete="off" placeholder="{{attr|title}}"/><span class="toggle"></span>
+									</div>
+									<div class="bf-filter-dropdown">
+										<ul>
+											{% for value in filters|get_item:attr %}
+											<li>
+												<label class="custom-checkbox" data-value="{{value}}">
+													<input type="checkbox" name="{{attr}}" data-value-id="{{value}}" autocomplete="off" />
+													<span>{{value|upper}}</span>
+												</label>
+											</li>
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+				<script>
           var data_php = {
-            searchButton: 1,
-            showPrice: 0,
-            showCounter: 1,
-            manualPrice: 0,
-            link: "/dumps-with-pin",
-            path: "59",
-            limit: 0,
-            params: "",
-            index: "filter_ocfilter",
-          };
-
-          var data_text = {
-            show_all: "Show all",
-            hide: "Hide",
-            load: "Loading...",
-            any: "All",
-            select: "Products not found",
-          };
-        </script>
-      </div>
+						searchButton: 1,
+						showPrice: 0,
+						showCounter: 1,
+						manualPrice: 0,
+						link: "https://bigfat.cc/cvv",
+						path: "66",
+						limit: 0,
+						params: "10123:4283433210;10124:4283432638",
+						index: "filter_ocfilter",
+					};
+          
+					var data_text = {
+						show_all: "Show all",
+						hide: "Hide",
+						load: "Loading...",
+						any: "All",
+						select: "Products not found",
+					};
+				</script>
+			</div>
     </div>
-		{% include 'base/messages.html' %}
+    {% include 'base/messages.html' %}
     <div class="bf-article-inner">
       <div class="bf-table-box bf-dumps-table">
         <div class="bf-table-header">

@@ -37,8 +37,8 @@ class CCBase(BaseModel):
 class CC(BaseModel):
     base = models.ForeignKey(CCBase, on_delete=models.CASCADE, null=True)
     cc = models.CharField(max_length=16)
-    month = models.IntegerField()
     cc_type = models.CharField(max_length=255, choices=CreditCard.choices, default=CreditCard.choices[0][0])
+    month = models.IntegerField()
     year = models.IntegerField()
     cvv = models.IntegerField()
     name = models.CharField(max_length=255)

@@ -1,42 +1,39 @@
+{% load filters %}
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <link rel="canonical" href="/"/>
+    <link rel="canonical" href="/" />
     <title>{{ name|title }}</title>
 
-
-    <base href="."/>
+    <base href="." />
 
     <meta name="viewport"
-          content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no"/>
+        content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="format-detection" content="address=no"/>
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-touch-fullscreen" content="yes"/>
-    <link rel="apple-touch-icon" sizes="180x180"
-          href="/static/logo.webp"/>
-    <link rel="icon" type="image/png" sizes="32x32"
-          href="/static/logo.webp"/>
-    <link rel="icon" type="image/png" sizes="16x16"
-          href="/static/logo.webp"/>
-    <link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest"/>
-    <meta name="msapplication-TileColor" content="#da532c"/>
-    <meta name="theme-color" content="#ffffff"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/logo.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/logo.webp" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/logo.webp" />
+    <link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
     <link rel="stylesheet" href="/static/1ec244110cbe26f19dafa6e2b268083c-1-1.css" as="style"
-          onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
-          media="screen"/>
+        onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+        media="screen" />
     <link rel="stylesheet" media="screen" href="/static/1ec244110cbe26f19dafa6e2b268083c-1-1.css"
-          crossorigin="anonymous"/>
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="/static/css2" as="style"
-          onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
-          media="screen"/>
-    <link rel="stylesheet" media="screen" href="/static/css2" crossorigin="anonymous"/>
+        onload="this.onload=null;this.rel=&#39;stylesheet&#39;;this.media=&#39;screen&#39;" crossorigin="anonymous"
+        media="screen" />
+    <link rel="stylesheet" media="screen" href="/static/css2" crossorigin="anonymous" />
     <script src="/static/jquery.min.js.download" crossorigin="anonymous"></script>
     <script src="/static/feather.min.js.download" crossorigin="anonymous"></script>
     <script src="/static/js.cookie.min.js.download" async="" crossorigin="anonymous"></script>
@@ -44,119 +41,149 @@
     <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
     <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
     <script src="/static/cart.js"></script>
-    <link rel="stylesheet" href="/static/logs.css">
+    <link rel="stylesheet" href="/static/logs.css" />
+    <script defer src="/static/filters.js"></script>
 </head>
 
 <body>
-{% include 'base/header.html' %}
-<div class="bf-article-page">
-    <div class="bf-article-page-headbox">
-        <div class="bf-article-page-headbox-overflow">
-            <div class="bf-article-headbox-left">
-                <ol class="bf-breadcrumb">
-                    <li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
-                    <li class="bf-breadcrumb-item"><a href="/{{ name }}">{{ name|title }}</a></li>
-                </ol>
-            </div>
+    {% include 'base/header.html' %}
+    <div class="bf-article-page">
+        <div class="bf-article-page-headbox">
+            <div class="bf-article-page-headbox-overflow">
+                <div class="bf-article-headbox-left">
+                    <ol class="bf-breadcrumb">
+                        <li class="bf-breadcrumb-item"><a href="/news">Home</a></li>
+                        <li class="bf-breadcrumb-item"><a href="/{{ name }}">{{ name|title }}</a></li>
+                    </ol>
+                </div>
 
-            <div class="bf-headbox-right">
-                <div class="bf-table-display-style"><i class="button-rows"></i><i class="button-columns"></i></div>
-                <div class="bf-filter-button check">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-sliders">
-                        <line x1="4" y1="21" x2="4" y2="14"></line>
-                        <line x1="4" y1="10" x2="4" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="12"></line>
-                        <line x1="12" y1="8" x2="12" y2="3"></line>
-                        <line x1="20" y1="21" x2="20" y2="16"></line>
-                        <line x1="20" y1="12" x2="20" y2="3"></line>
-                        <line x1="1" y1="14" x2="7" y2="14"></line>
-                        <line x1="9" y1="8" x2="15" y2="8"></line>
-                        <line x1="17" y1="16" x2="23" y2="16"></line>
-                    </svg>
+                <div class="bf-headbox-right">
+                    <div class="bf-table-display-style"><i class="button-rows"></i><i class="button-columns"></i></div>
+                    <div class="bf-filter-button check">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-sliders">
+                            <line x1="4" y1="21" x2="4" y2="14"></line>
+                            <line x1="4" y1="10" x2="4" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12" y2="3"></line>
+                            <line x1="20" y1="21" x2="20" y2="16"></line>
+                            <line x1="20" y1="12" x2="20" y2="3"></line>
+                            <line x1="1" y1="14" x2="7" y2="14"></line>
+                            <line x1="9" y1="8" x2="15" y2="8"></line>
+                            <line x1="17" y1="16" x2="23" y2="16"></line>
+                        </svg>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="bf-filter-all-selects visible overflow-visible">
-            <div id="ocfilter-button">
-                <button class="btn btn-default" data-loading-text=""></button>
+            <div class="bf-filter-all-selects visible overflow-visible">
+                <div id="ocfilter-button">
+                    <button class="btn btn-default" data-loading-text=""></button>
+                </div>
+                <div id="ocfilter" class="panel ocfilter panel-default mobfill hidden-xs filter-wrapper-block">
+                    <div class="bf-filter-all-select-items">
+                        <ul class="bf-filter-items">
+                            {% for attr in attrs %}
+                            <li class="bf-filter-item-block filter-num-block checkbox-many">
+                                <div class="bf-filter-item-box bf-filter-drop-list with-drop-select checkbox">
+                                    <div class="parent">
+                                        <input type="text" class="checkbox-many-input ocf-target input ajax-filter"
+                                            autocomplete="off" placeholder="{{attr|title}}" /><span
+                                            class="toggle"></span>
+                                    </div>
+                                    <div class="bf-filter-dropdown">
+                                        <ul>
+                                            {% for value in filters|get_item:attr %}
+                                            <li>
+                                                <label class="custom-checkbox" data-value="{{value}}">
+                                                    <input type="checkbox" name="{{attr}}" data-value-id="{{value}}"
+                                                        autocomplete="off" />
+                                                    <span>{{value|upper}}</span>
+                                                </label>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <script>
+                    var data_php = {
+                        searchButton: 1,
+                        showPrice: 0,
+                        showCounter: 1,
+                        manualPrice: 0,
+                        link: "https://bigfat.cc/cvv",
+                        path: "66",
+                        limit: 0,
+                        params: "10123:4283433210;10124:4283432638",
+                        index: "filter_ocfilter",
+                    };
+
+                    var data_text = {
+                        show_all: "Show all",
+                        hide: "Hide",
+                        load: "Loading...",
+                        any: "All",
+                        select: "Products not found",
+                    };
+                </script>
             </div>
-            <script>
-          var data_php = {
-            searchButton: 1,
-            showPrice: 0,
-            showCounter: 1,
-            manualPrice: 0,
-            link: "/dumps-with-pin",
-            path: "59",
-            limit: 0,
-            params: "",
-            index: "filter_ocfilter",
-          };
-
-          var data_text = {
-            show_all: "Show all",
-            hide: "Hide",
-            load: "Loading...",
-            any: "All",
-            select: "Products not found",
-          };
-
-            </script>
         </div>
-    </div>
 
-    <div class="bf-article-inner">
-        <div class="bf-table-box bf-dumps-table">
-            <div class="bf-table-header">
-                <div class="bf-table-cell"><span>Title</span></div>
-                <div class="bf-table-cell"><span>Description</span></div>
-                <div class="bf-table-cell"><span>Category</span></div>
-                <div class="bf-table-cell"><span>PRICE</span></div>
-                <div class="bf-table-cell"><span>QTY</span></div>
-                <div class="bf-table-cell"><span>&nbsp;</span></div>
+        <div class="bf-article-inner">
+            <div class="bf-table-box bf-dumps-table">
+                <div class="bf-table-header">
+                    <div class="bf-table-cell"><span>Title</span></div>
+                    <div class="bf-table-cell"><span>Description</span></div>
+                    <div class="bf-table-cell"><span>Category</span></div>
+                    <div class="bf-table-cell"><span>PRICE</span></div>
+                    <div class="bf-table-cell"><span>QTY</span></div>
+                    <div class="bf-table-cell"><span>&nbsp;</span></div>
+                </div>
             </div>
-        </div>
 
-        <div class="bf-table-box bf-dumps-table">
-            <ul class="bf-table-items-row popular-tag-items">
-                {% for row in data %}
-                <li class="bf-table-item-row">
-                    <div class="bf-table-items">
-                        <div class="bf-table-cell">
-                            <span><small>Bin</small> {{row.title}}</span>
-                        </div>
-                        <div class="bf-table-cell bf-title-fulltext" data-title="{{row.description}}">
-                            <span><small>Description</small>{{row.description}}</span>
-                        </div>
-                        <div class="bf-table-cell">
-                            <span><small>Category</small>{{row.category}}</span>
-                        </div>
-                        <div class="bf-table-cell">
-                            <span><small>Price:</small>$ {{row.price}}</span>
-                        </div>
-                        <div class="bf-table-cell">
-                            <div class="bf-table-quantity">
-                                <input type="button" value="" class="button-minus" data-field="quantity"
-                                       wfd-id="id286"/>
-                                <input type="number" step="1" min="1" value="1" name="quantity" class="quantity-field"
-                                       wfd-id="id287"/>
-                                <input type="button" value="" class="button-plus" data-field="quantity" wfd-id="id288"/>
+            <div class="bf-table-box bf-dumps-table">
+                <ul class="bf-table-items-row popular-tag-items">
+                    {% for row in data %}
+                    <li class="bf-table-item-row">
+                        <div class="bf-table-items">
+                            <div class="bf-table-cell">
+                                <span><small>Title</small> {{row.title}}</span>
+                            </div>
+                            <div class="bf-table-cell bf-title-fulltext" data-title="{{row.description}}">
+                                <span><small>Description</small>{{row.description}}</span>
+                            </div>
+                            <div class="bf-table-cell">
+                                <span><small>Category</small>{{row.category}}</span>
+                            </div>
+                            <div class="bf-table-cell">
+                                <span><small>Price:</small>$ {{row.price}}</span>
+                            </div>
+                            <div class="bf-table-cell">
+                                <div class="bf-table-quantity">
+                                    <input type="button" value="" class="button-minus" data-field="quantity"
+                                        wfd-id="id286" />
+                                    <input type="number" step="1" min="1" value="1" name="quantity"
+                                        class="quantity-field" wfd-id="id287" />
+                                    <input type="button" value="" class="button-plus" data-field="quantity"
+                                        wfd-id="id288" />
+                                </div>
+                            </div>
+                            <div class="bf-table-cell">
+                                <button class="addcart" data-product-id="{{name}}/{{row.id}}"></button>
                             </div>
                         </div>
-                        <div class="bf-table-cell">
-                            <button class="addcart" data-product-id="{{name}}/{{row.id}}"></button>
-                        </div>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
-</div>
-
 </body>
 
 </html>

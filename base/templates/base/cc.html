@@ -1,3 +1,4 @@
+{% load filters %}
 <!DOCTYPE html>
 
 <html>
@@ -8,7 +9,6 @@
 	<link rel="canonical" href="/" />
 	<title>Buy CC</title>
 
-	
 	<base href="." />
 
 	<meta name="viewport"
@@ -19,12 +19,9 @@
 	<meta name="format-detection" content="address=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-touch-fullscreen" content="yes" />
-	<link rel="apple-touch-icon" sizes="180x180"
-		href="/static/logo.webp" />
-	<link rel="icon" type="image/png" sizes="32x32"
-		href="/static/logo.webp" />
-	<link rel="icon" type="image/png" sizes="16x16"
-		href="/static/logo.webp" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/logo.webp" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/logo.webp" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/logo.webp" />
 	<link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="theme-color" content="#ffffff" />
@@ -45,8 +42,9 @@
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
 	<script src="/static/cart.js"></script>
-	<link rel="stylesheet" href="/static/cc.css">
-	<link rel="stylesheet" href="/static/style.css">
+	<link rel="stylesheet" href="/static/cc.css" />
+	<link rel="stylesheet" href="/static/style.css" />
+	<script defer src="/static/filters.js"></script>
 </head>
 
 <body>
@@ -81,23 +79,69 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="bf-filter-all-selects visible overflow-visible">
 				<div id="ocfilter-button">
 					<button class="btn btn-default" data-loading-text=""></button>
 				</div>
+				<div id="ocfilter" class="panel ocfilter panel-default mobfill hidden-xs filter-wrapper-block">
+					<div class="bf-filter-all-select-items">
+						<ul class="bf-filter-items">
+							{% for attr in attrs %}
+							<li class="bf-filter-item-block filter-num-block checkbox-many">
+								<div class="bf-filter-item-box bf-filter-drop-list with-drop-select checkbox">
+									<div class="parent">
+										<input type="text" class="checkbox-many-input ocf-target input ajax-filter"
+											autocomplete="off" placeholder="{{attr|title}}" data-option-id="{{attr}}"/><span class="toggle"></span>
+									</div>
+									<div class="bf-filter-dropdown">
+										<ul>
+											{% for value in filters|get_item:attr %}
+											<li>
+												<label class="custom-checkbox" data-value="{{value}}">
+													<input type="checkbox" name="base" data-value-id="{{value}}" autocomplete="off" />
+													<span>{{value|upper}}</span>
+												</label>
+											</li>
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+							</li>
+							{% endfor %}
+							<!-- <li class="bf-filter-item-block bf-filter-item-selects">
+								<div class="bf-filter-item-box">
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-dob"
+										data-option-id="10124" data-value-id="4283432638">
+										<span>DOB</span>
+									</div>
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-ssn"
+										data-option-id="10125" data-value-id="4283462902">
+										<span>SSN</span>
+									</div>
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-mmn"
+										data-option-id="10127" data-value-id="4283462900">
+										<span>MMN</span>
+									</div>
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-email"
+										data-option-id="10123" data-value-id="4283433210">
+										<span>EMAIL</span>
+									</div>
+								</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
 
-				
 				<script>
 					var data_php = {
 						searchButton: 1,
 						showPrice: 0,
 						showCounter: 1,
 						manualPrice: 0,
-						link: "/cvv",
+						link: "/cc",
 						path: "66",
 						limit: 0,
-						params: "",
+						params: "10123:4283433210;10124:4283432638",
 						index: "filter_ocfilter",
 					};
 
@@ -142,8 +186,9 @@
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc|truncatechars:7}}">
 								<span><small>CC</small>{{cc.cc|truncatechars:7}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{ cc.month|stringformat:'02d' }}/{{cc.year|stringformat:'02d'}}">
-								<span><small>Exp</small>{{ cc.month|stringformat:"02d" }}/{{cc.year|stringformat:"02d"}}</span>
+							<div class="bf-table-cell bf-title-fulltext"
+								data-title="{{ cc.month|stringformat:'02d' }}/{{cc.year|stringformat:'02d'}}">
+								<span><small>Exp</small>{{ cc.month|stringformat:"02d"}}/{{cc.year|stringformat:"02d"}}</span>
 							</div>
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{ cc.base.name }}">
 								<span><small>Base</small>{{ cc.base.name }}</span>
@@ -180,11 +225,8 @@
 					{% endfor %}
 				</ul>
 			</div>
-
-			
 		</div>
 	</div>
-
 </body>
 
 </html>

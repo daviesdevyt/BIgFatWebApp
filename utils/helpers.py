@@ -1,4 +1,4 @@
-import requests
+from django.core.cache import cache
 
 # def get_cc_status(name, ccn, mm, yy, cvv, email):
 #     session = requests.Session()
@@ -71,3 +71,20 @@ import requests
 
 def confirm_payment(response):
     return response["data"]["payments"][0]["status"] if len(response["data"]["payments"]) > 0 else "PENDING"
+
+def filter_objects(request, model, attrs, name):
+    filters = {}
+    for var, value in request.GET.items():
+        if var not in attrs:
+            continue
+        filters[var] = value
+    
+    cache_key = f"{name}_filters"
+    if cache.get(cache_key):
+        unique = cache.get(cache_key)
+    else:
+        unique = {}
+        for attr in attrs:
+            unique[attr] = model.objects.filter(purchased=False).values_list(attr, flat=True).distinct(attr)
+        cache.set(cache_key, unique, 60*60*24)
+    return unique, filters
