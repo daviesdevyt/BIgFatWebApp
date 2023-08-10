@@ -1,0 +1,11 @@
+{% load filters %}
+
+<div class="bf-article-pagination paginator">
+    {% for page in paginator.num_pages|range %}
+    {% if page > 1 %}
+    <a class="button-adaptive-{{ page|floatformat:"0" }}" href="?page={{page}}">{{page}}</a>
+    {% else %}
+    <a href="?page={{page}}" {% if page == request.GET|get_item:page %}class="select"{% endif %}>{{page}}</a>        
+    {% endif %}
+    {% endfor %}
+</div>

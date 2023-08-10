@@ -9,7 +9,7 @@
   <link rel="canonical" href="/" />
   <title>Dumps</title>
 
-  
+
   <base href="." />
 
   <meta name="viewport" content="width=device-width initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no" />
@@ -19,12 +19,9 @@
   <meta name="format-detection" content="address=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-touch-fullscreen" content="yes" />
-  <link rel="apple-touch-icon" sizes="180x180"
-    href="/static/logo.webp" />
-  <link rel="icon" type="image/png" sizes="32x32"
-    href="/static/logo.webp" />
-  <link rel="icon" type="image/png" sizes="16x16"
-    href="/static/logo.webp" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/logo.webp" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/logo.webp" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/logo.webp" />
   <link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
   <meta name="msapplication-TileColor" content="#da532c" />
   <meta name="theme-color" content="#ffffff" />
@@ -44,7 +41,7 @@
   <script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
   <script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
-	<script src="/static/cart.js"></script>
+  <script src="/static/cart.js"></script>
   <link rel="stylesheet" href="/static/dumps.css">
   <link rel="stylesheet" href="/static/style.css">
   <script defer src="/static/filters.js"></script>
@@ -196,6 +193,7 @@
           {% endfor %}
         </ul>
       </div>
+      {% include 'base/paginator.html' %}
     </div>
   </div>
 

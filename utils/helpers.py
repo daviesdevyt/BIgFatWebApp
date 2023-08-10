@@ -86,5 +86,5 @@ def filter_objects(request, model, attrs, name):
         unique = {}
         for attr in attrs:
             unique[attr] = model.objects.filter(purchased=False).values_list(attr, flat=True).distinct(attr)
-        cache.set(cache_key, unique, 60*60*24)
+        cache.set(cache_key, unique, 60*60*3)
     return unique, filters
