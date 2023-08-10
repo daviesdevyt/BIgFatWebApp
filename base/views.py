@@ -43,7 +43,7 @@ def support(request):
 
 @login_required
 def cc(request):
-    attrs = ["base", "country", "state"]
+    attrs = ["base__name", "country", "state"]
     unique, filters = filter_objects(request, CC, attrs, "cc")
     paginator = DjangoPaginator(CC.objects.filter(purchased=False, **filters).order_by("date_created"), 20)
     return render(request, "base/cc.html", {"ccs": paginator.get_page(request.GET.get("page", 1)),

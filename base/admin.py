@@ -19,10 +19,34 @@ class FullzAdmin(admin.ModelAdmin):
     search_fields = ('base', 'country', 'state')
     ordering = ('-date_created',)
 
-admin.site.register(Logs)
-admin.site.register(Guides)
-admin.site.register(Services)
-admin.site.register(CCBase)
+@admin.register(Logs)
+class LogsAdmin(admin.ModelAdmin):
+    list_display = ('title', "category", 'purchased', 'date_created')
+    list_filter = ('title', 'category', "purchased", 'date_created')
+    search_fields = ('title', 'description', 'category')
+    ordering = ('-date_created',)
+
+
+@admin.register(Guides)
+class GuidesAdmin(admin.ModelAdmin):
+    list_display = ('title', "category", 'purchased', 'date_created')
+    list_filter = ('title', 'category', "purchased", 'date_created')
+    search_fields = ('title', 'description', 'category')
+    ordering = ('-date_created',)
+
+@admin.register(Services)
+class ServicesAdmin(admin.ModelAdmin):
+    list_display = ('title', "category", 'purchased', 'date_created')
+    list_filter = ('title', 'category', "purchased", 'date_created')
+    search_fields = ('title', 'description', 'category')
+    ordering = ('-date_created',)
+
+@admin.register(CCBase)
+class CCBaseAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date_created')
+    list_filter = ('name', 'date_created')
+    search_fields = ('name',)
+    ordering = ('-date_created',)
 
 @admin.register(Dumps)
 class DumpsAdmin(admin.ModelAdmin):

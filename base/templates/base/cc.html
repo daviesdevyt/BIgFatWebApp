@@ -91,14 +91,14 @@
 								<div class="bf-filter-item-box bf-filter-drop-list with-drop-select checkbox">
 									<div class="parent">
 										<input type="text" class="checkbox-many-input ocf-target input ajax-filter"
-											autocomplete="off" placeholder="{{attr|title}}" data-option-id="{{attr}}"/><span class="toggle"></span>
+											autocomplete="off" placeholder="{{attr|title|rewrite_base}}" data-option-id="{{attr}}"/><span class="toggle"></span>
 									</div>
 									<div class="bf-filter-dropdown">
 										<ul>
 											{% for value in filters|get_item:attr %}
 											<li>
 												<label class="custom-checkbox" data-value="{{value}}">
-													<input type="checkbox" name="base" data-value-id="{{value}}" autocomplete="off" />
+													<input type="checkbox" name="{{attr}}" data-value-id="{{value}}" autocomplete="off" />
 													<span>{{value|upper}}</span>
 												</label>
 											</li>
@@ -183,8 +183,8 @@
 							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc_type}}">
 								<span><small>CC Type</small>{{cc.cc_type}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc|truncatechars:7}}">
-								<span><small>CC</small>{{cc.cc|truncatechars:7}}</span>
+							<div class="bf-table-cell bf-title-fulltext" data-title="{{cc.cc|truncate:6}}">
+								<span><small>CC</small>{{cc.cc|truncate:6}}</span>
 							</div>
 							<div class="bf-table-cell bf-title-fulltext"
 								data-title="{{ cc.month|stringformat:'02d' }}/{{cc.year|stringformat:'02d'}}">
