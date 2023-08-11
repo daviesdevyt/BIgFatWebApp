@@ -129,7 +129,13 @@ class CartProduct(BaseModel):
 
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
-        obj = data[self.product].objects.get(id=self.product_id)
+        try:
+            obj = data[self.product].objects.get(id=self.product_id)
+        except:
+            return None
+        if obj.purchased:
+            self.delete()
+            return
         obj.product = self.product.upper()
         obj.cart_id = self.id
         return obj
@@ -142,7 +148,10 @@ class Order(BaseModel):
 
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
-        obj = data[self.product].objects.get(id=self.product_id)
+        try:
+            obj = data[self.product].objects.get(id=self.product_id)
+        except:
+            return None
         if self.product not in ["guides", "services"]:
             obj.purchased = True
         obj.save()

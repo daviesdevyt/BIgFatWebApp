@@ -88,8 +88,9 @@ def cart(request):
     total = 0
     for item in CartProduct.objects.filter(user=request.user):
         i = item.get_data()
-        total += i.price
-        cart.append(i)
+        if i:
+            total += i.price
+            cart.append(i)
     return render(request, "base/cart.html", {"total": total, "cart": cart})
 
 
@@ -121,8 +122,9 @@ def checkout(request):
         total = 0
         for item in cart:
             i = item.get_data()
-            total += i.price
-            orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
+            if i:
+                total += i.price
+                orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
         if total > request.user.balance:
             messages.error(request, "Insufficient balance")
             return redirect("cart")
@@ -134,5 +136,7 @@ def checkout(request):
 def purchases(request):
     purchases = list()
     for item in Order.objects.filter(user=request.user):
-        purchases.append(item.get_data())
+        i = item.get_data()
+        if i:
+            purchases.append(i)
     return render(request, "base/purchases.html", {"purchases": purchases})
