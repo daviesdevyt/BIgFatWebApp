@@ -115,8 +115,9 @@
 							{% endfor %}
 							<br />
 							<h2>Status: <span id="tx-status">{{tx.status}}</span></h2>
+							<br>
 							<a href="/verify/{{request.user.pay_id}}" id="input-calc"
-								class="verify-payment">Verify</a>
+								class="verify-payment">Verify Transaction</a>
 							{% else %}
 							<form action="" method="post">
 								{% csrf_token %}
