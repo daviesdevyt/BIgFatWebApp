@@ -17,3 +17,8 @@ def rewrite_base(text):
 @register.filter(name='truncate')
 def truncate_and_remove_dots(value, arg):
     return value[:int(arg)]
+
+@register.filter(name='fullz_name')
+def fullz_name(full_name):
+    fname, *lname = full_name.split()
+    return fname +" "+ lname[0][0].upper() + "."

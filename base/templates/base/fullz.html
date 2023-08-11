@@ -156,8 +156,8 @@
           {% for fullz in fullzz %}
           <li class="bf-table-item-row">
             <div class="bf-table-items">
-              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.name}}">
-                <span><small>Name</small> {{fullz.name}}</span>
+              <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.name|fullz_name}}">
+                <span><small>Name</small> {{fullz.name|fullz_name}}</span>
               </div>
               <div class="bf-table-cell bf-title-fulltext" data-title="{{fullz.DOB}}">
                 <span><small>DOB</small> {{ fullz.DOB|date:"SHORT_DATE_FORMAT" }} </span>
