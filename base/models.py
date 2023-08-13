@@ -46,7 +46,7 @@ class CC(BaseModel):
     address = models.TextField()
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
-    zip = models.IntegerField()
+    zip = models.CharField(max_length=10)
     country = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     email = models.CharField(max_length=255, null=True, blank=True)
@@ -64,7 +64,7 @@ class Fullz(BaseModel):
     country = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    zip = models.IntegerField()
+    zip = models.CharField(max_length=10)
     description = models.TextField()
     price = models.FloatField()
     purchased = models.BooleanField(default=False)
@@ -124,7 +124,7 @@ class Services(BaseModel):
 
 class CartProduct(BaseModel):
     product = models.CharField(max_length=64)
-    product_id = models.UUIDField(unique=True)
+    product_id = models.UUIDField()
     user = models.ForeignKey(User, models.CASCADE, related_name="cart")
 
     def get_data(self):
