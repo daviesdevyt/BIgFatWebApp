@@ -41,6 +41,7 @@
 	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/4be70cad86474cbf063dde72dfaff080-1-1.js.download" async="" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/static/cart.js"></script>
 	<link rel="stylesheet" href="/static/cc.css" />
 	<link rel="stylesheet" href="/static/style.css" />
@@ -59,7 +60,6 @@
 						<li class="bf-breadcrumb-item"><a href="/cc">CC</a></li>
 					</ol>
 				</div>
-
 				<div class="bf-headbox-right">
 					<div class="bf-table-display-style"><i class="button-rows"></i><i class="button-columns"></i></div>
 					<div class="bf-filter-button check">
@@ -86,6 +86,13 @@
 				<div id="ocfilter" class="panel ocfilter panel-default mobfill hidden-xs filter-wrapper-block">
 					<div class="bf-filter-all-select-items">
 						<ul class="bf-filter-items">
+							<li class="bf-filter-item-block" id="ocfilter2">
+								<div class="bf-filter-item-box">
+									<label data-option-id="text10109">
+										<input type="text" class="filter_area ocf-target search_title" name="bin_search" placeholder="Search BIN: 477989">										
+									</label>
+								</div>
+							</li>
 							{% for attr in attrs %}
 							<li class="bf-filter-item-block filter-num-block checkbox-many">
 								<div class="bf-filter-item-box bf-filter-drop-list with-drop-select checkbox">
@@ -108,26 +115,22 @@
 								</div>
 							</li>
 							{% endfor %}
-							<!-- <li class="bf-filter-item-block bf-filter-item-selects">
+							<li class="bf-filter-item-block bf-filter-item-selects">
 								<div class="bf-filter-item-box">
-									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-dob"
-										data-option-id="10124" data-value-id="4283432638">
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select" data-prop="DOB">
 										<span>DOB</span>
 									</div>
-									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-ssn"
-										data-option-id="10125" data-value-id="4283462902">
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select" data-prop="ssn">
 										<span>SSN</span>
 									</div>
-									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-mmn"
-										data-option-id="10127" data-value-id="4283462900">
-										<span>MMN</span>
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select" data-prop="phone_number">
+										<span>Phone</span>
 									</div>
-									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select bf-sort-email"
-										data-option-id="10123" data-value-id="4283433210">
+									<div class="filter_area ocf-target ocfilter-bool-button bf-sort-button-select" data-prop="email"> 
 										<span>EMAIL</span>
 									</div>
 								</div>
-							</li> -->
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -1,4 +1,5 @@
 from django import template
+from django.http import QueryDict
 
 register = template.Library()
 
@@ -22,3 +23,14 @@ def truncate_and_remove_dots(value, arg):
 def fullz_name(full_name):
     fname, *lname = full_name.split()
     return fname +" "+ lname[0][0].upper() + "."
+
+@register.filter(name='paginator')
+def urlencode(url_dict: QueryDict):
+    url_dict = url_dict.copy()
+    try:
+        popped = url_dict.pop("page")
+        if popped:
+            return ""
+    except KeyError:
+        pass
+    return url_dict.urlencode()

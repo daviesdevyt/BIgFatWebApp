@@ -45,7 +45,17 @@ def support(request):
 def cc(request):
     attrs = ["base__name", "country", "state"]
     unique, filters = filter_objects(request, CC, attrs, "cc")
-    paginator = DjangoPaginator(CC.objects.filter(purchased=False, **filters).order_by("date_created"), 20)
+    f = {}
+    for var, value in request.GET.items():
+        if var in ["DOB", "ssn", "phone_number", "email"]:
+            if value == "true":
+                value = True
+            if value == "false":
+                value = False
+            f[f"{var}__isnull"] = value
+    if request.GET.get("cc"):
+        filters["cc__startswith"] = request.GET.get("cc")
+    paginator = DjangoPaginator(CC.objects.filter(purchased=False, **filters).order_by("date_created").exclude(**f), 20)
     return render(request, "base/cc.html", {"ccs": paginator.get_page(request.GET.get("page", 1)),
                                             "filters": unique, "attrs": attrs, "paginator": paginator})
 
