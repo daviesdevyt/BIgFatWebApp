@@ -13,7 +13,8 @@ $(".bf-sort-button-select").on("click", function(e){
 })
 
 $(".search_title").on("change", function(){
-    custom_filter_values["cc"] = $(this).val()
+    let type = $(this).data("type")
+    custom_filter_values[type] = $(this).val()
     filters_btn_function()
 })
 

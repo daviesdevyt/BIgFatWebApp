@@ -89,7 +89,7 @@
 							<li class="bf-filter-item-block" id="ocfilter2">
 								<div class="bf-filter-item-box">
 									<label data-option-id="text10109">
-										<input type="text" class="filter_area ocf-target search_title" name="bin_search" placeholder="Search BIN: 477989">										
+										<input type="text" class="filter_area ocf-target search_title" data-type="cc" name="bin_search" placeholder="Search BIN: 477989">										
 									</label>
 								</div>
 							</li>
@@ -215,7 +215,7 @@
 								<span><small>SSN</small>{% if cc.ssn != None %}✅{% else %}❌{% endif %}</span>
 							</div>
 							<div class="bf-table-cell">
-								<span><small>DOB</small>{% if cc.dob != None %}✅{% else %}❌{% endif %}</span>
+								<span><small>DOB</small>{% if cc.DOB != None %}✅{% else %}❌{% endif %}</span>
 							</div>
 							<div class="bf-table-cell">
 								<span><small>Price</small>$ {{cc.price}}</span>

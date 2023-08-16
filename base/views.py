@@ -74,6 +74,8 @@ def fullz(request):
 def dumps(request):
     attrs = ["cc_type", "code", "country", "bank"]
     unique, filters = filter_objects(request, Dumps, attrs, "dumps")
+    if request.GET.get("dumps"):
+        filters["bin__startswith"] = request.GET.get("dumps")
     paginator = DjangoPaginator(Dumps.objects.filter(purchased=False, **filters).order_by("date_created"), 20)
     return render(request, "base/dumps.html", {"dumps": paginator.get_page(request.GET.get("page", 1)),
                                                "filters": unique, "attrs": attrs, "paginator": paginator})
