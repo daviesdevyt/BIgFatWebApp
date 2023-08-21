@@ -162,4 +162,5 @@ class Order(BaseModel):
         data.pop("base", None)
         obj.data = str(data).replace("'", '').replace(", ", "\n").replace("{", "").replace("}", "")
         obj.product = self.product.upper()
+        obj.date_created = self.date_created
         return obj

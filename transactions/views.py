@@ -50,7 +50,7 @@ def verify_tx(request, pay_id):
         tx.status = status
         tx.save()
         if status == TransactionStatus.PENDING:
-            messages.success(request, "Transaction Pending")
+            messages.error(request, "Transaction Pending")
         elif status == TransactionStatus.CONFIRMED:
             amt = float(res["data"]["payments"][0]["value"]["local"]["amount"])
             user = User.objects.filter(id=request.user.id)
@@ -61,4 +61,4 @@ def verify_tx(request, pay_id):
             messages.error(request, "Transaction Expired")
     except:
         messages.error(request, "Something went wrong")
-    return redirect("transactions")
+    return redirect("wallet")

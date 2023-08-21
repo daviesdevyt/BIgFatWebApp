@@ -140,6 +140,8 @@ def checkout(request):
         if total > request.user.balance:
             messages.error(request, "Insufficient balance")
             return redirect("cart")
+        request.user.balance -= total
+        request.user.save()
         Order.objects.bulk_create(orders)
         empty_cart(request)
     return redirect("purchases")
@@ -147,7 +149,7 @@ def checkout(request):
 
 def purchases(request):
     purchases = list()
-    for item in Order.objects.filter(user=request.user):
+    for item in Order.objects.filter(user=request.user).order_by("-date_created"):
         i = item.get_data()
         if i:
             purchases.append(i)

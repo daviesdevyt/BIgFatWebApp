@@ -25,3 +25,10 @@ form button,
     min-width: 670px;
   }
 }
+
+a {
+  text-decoration: none; /* This removes the underline */
+}
+.bf-payment-block{
+  margin-top: 0;
+}
