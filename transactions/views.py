@@ -32,7 +32,8 @@ def wallet(request):
         expiry_raw = res["data"]["expires_at"].replace("Z", "")
         expiry = datetime.fromisoformat(expiry_raw).strftime("%B %d, %I:%M %p")
     
-    context = {"addresses": addresses.items(), "expiry": expiry, "tx": tx, "txs": request.user.transactions.order_by("-date_created")[:10]} if res else {}
+    context = {"addresses": addresses.items(), "expiry": expiry, "tx": tx} if res else {}
+    context.update({"txs": request.user.transactions.order_by("-date_created")[:10]})
     return render(request, 'transactions/add-money.html', context)
 
 @login_required
@@ -48,17 +49,18 @@ def verify_tx(request, pay_id):
         res = coinbase.get_charge(pay_id)
         status = confirm_payment(res)
         tx.status = status
-        tx.save()
         if status == TransactionStatus.PENDING:
             messages.error(request, "Transaction Pending")
         elif status == TransactionStatus.CONFIRMED:
             amt = float(res["data"]["payments"][0]["value"]["local"]["amount"])
+            tx.amount = amt
             user = User.objects.filter(id=request.user.id)
             user.update(pay_id=None, balance=user.first().balance+amt)
             messages.success(request, "Transaction Verified!")
         elif status == TransactionStatus.EXPIRED:
             User.objects.filter(id=request.user.id).update(pay_id=None)
             messages.error(request, "Transaction Expired")
+        tx.save()
     except:
         messages.error(request, "Something went wrong")
     return redirect("wallet")
