@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import get_object_or_404, render, HttpResponse, redirect
+from django.http import JsonResponse
 from django.contrib import messages
 from utils.helpers import filter_objects
 from .models import CartProduct, News, CC, Fullz, Dumps, Logs, Guides, Services, Order
 from rest_framework.pagination import DjangoPaginator
+from utils.cc_checker import cc_checker
 
 
 # Create your views here.
@@ -19,7 +21,7 @@ def checkout(request):
         orders = []
         total = 0
         for item in cart:
-            i = item.get_data()
+            i = item.get_data
             total += i.price
             orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
         if total > request.user.balance:
@@ -33,7 +35,7 @@ def checkout(request):
 def purchases(request):
     purchases = list()
     for item in Order.objects.filter(user=request.user):
-        purchases.append(item.get_data())
+        purchases.append(item.get_data)
     return render(request, "base/purchases.html", {"purchases": purchases})
 
 @login_required
@@ -55,7 +57,7 @@ def cc(request):
             f[f"{var}__isnull"] = value
     if request.GET.get("cc"):
         filters["cc__startswith"] = request.GET.get("cc")
-    paginator = DjangoPaginator(CC.objects.filter(purchased=False, **filters).order_by("date_created").exclude(**f), 20)
+    paginator = DjangoPaginator(CC.objects.filter(purchased=False, **filters).order_by("date_created").exclude(**f), 10)
     return render(request, "base/cc.html", {"ccs": paginator.get_page(request.GET.get("page", 1)),
                                             "filters": unique, "attrs": attrs, "paginator": paginator})
 
@@ -64,7 +66,7 @@ def cc(request):
 def fullz(request):
     attrs = ["category", "country", "state"]
     unique, filters = filter_objects(request, Fullz, attrs, "fullz")
-    paginator = DjangoPaginator(Fullz.objects.filter(purchased=False, **filters).order_by("date_created"), 20)
+    paginator = DjangoPaginator(Fullz.objects.filter(purchased=False, **filters).order_by("date_created"), 10)
     return render(request, "base/fullz.html",
                   {"fullzz": paginator.get_page(request.GET.get("page", 1)),
                    "filters": unique, "attrs": attrs, "paginator": paginator})
@@ -76,7 +78,7 @@ def dumps(request):
     unique, filters = filter_objects(request, Dumps, attrs, "dumps")
     if request.GET.get("dumps"):
         filters["bin__startswith"] = request.GET.get("dumps")
-    paginator = DjangoPaginator(Dumps.objects.filter(purchased=False, **filters).order_by("date_created"), 20)
+    paginator = DjangoPaginator(Dumps.objects.filter(purchased=False, **filters).order_by("date_created"), 10)
     return render(request, "base/dumps.html", {"dumps": paginator.get_page(request.GET.get("page", 1)),
                                                "filters": unique, "attrs": attrs, "paginator": paginator})
 
@@ -88,7 +90,7 @@ def logs(request, title):
     classes = {"logs": Logs, "guides": Guides, "services": Services}
     attrs = ["category"]
     unique, filters = filter_objects(request, classes[title], attrs, title.lower())
-    paginator = DjangoPaginator(classes[title].objects.filter(purchased=False, **filters).order_by("date_created"), 20)
+    paginator = DjangoPaginator(classes[title].objects.filter(purchased=False, **filters).order_by("date_created"), 10)
     return render(request, "base/logs.html",
                   {"data": paginator.get_page(request.GET.get("page", 1)), "name": title,
                    "filters": unique, "attrs": attrs, "paginator": paginator})
@@ -99,7 +101,7 @@ def cart(request):
     cart = list()
     total = 0
     for item in CartProduct.objects.filter(user=request.user):
-        i = item.get_data()
+        i = item.get_data
         if i:
             total += i.price
             cart.append(i)
@@ -133,7 +135,7 @@ def checkout(request):
         orders = []
         total = 0
         for item in cart:
-            i = item.get_data()
+            i = item.get_data
             if i:
                 total += i.price
                 orders.append(Order(product=item.product, product_id=item.product_id, user=request.user))
@@ -150,7 +152,21 @@ def checkout(request):
 def purchases(request):
     purchases = list()
     for item in Order.objects.filter(user=request.user).order_by("-date_created"):
-        i = item.get_data()
+        i = item.get_data
         if i:
             purchases.append(i)
     return render(request, "base/purchases.html", {"purchases": purchases})
+
+@login_required
+def cc_checker_view(request, product_id):
+    product = get_object_or_404(CC, id=product_id)
+    if product.purchased:
+        CartProduct.objects.filter(product_id=product_id, user=request.user).delete()
+        return JsonResponse({"message":"Product has been bought", "code":400}, safe=False)
+    
+    response = cc_checker(product.cc, product.month, product.year, product.cvv)
+    if response:
+        status = response.get("status" ,"")
+        status = "valid" if status.find("LIVE") != -1 else "decline"
+        return JsonResponse({"status": status, "code": 200}, safe=False)
+    return JsonResponse({"message":"Service tempoarily unavailable", "code":400}, safe=False)

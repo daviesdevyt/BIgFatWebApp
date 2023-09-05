@@ -7,7 +7,7 @@ from django.db import models
 from authentication.models import User
 # Create your models here.
 from utils.constants import CreditCard
-from django.forms.models import model_to_dict
+from django.utils.functional import cached_property
 
 
 class BaseModel(models.Model):
@@ -54,6 +54,7 @@ class CC(BaseModel):
     DOB = models.DateField(null=True, blank=True)
     price = models.FloatField()
     purchased = models.BooleanField(default=False)
+
     extra = models.TextField(null=True, blank=True)
 
 
@@ -127,6 +128,7 @@ class CartProduct(BaseModel):
     product_id = models.UUIDField()
     user = models.ForeignKey(User, models.CASCADE, related_name="cart")
 
+    @cached_property
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
         try:
@@ -146,6 +148,7 @@ class Order(BaseModel):
     product_id = models.UUIDField()
     user = models.ForeignKey(User, models.CASCADE, related_name="orders")
 
+    @cached_property
     def get_data(self):
         data = {"cc": CC, "dumps": Dumps, "fullz": Fullz, "logs": Logs, "guides": Guides, "services": Services}
         try:

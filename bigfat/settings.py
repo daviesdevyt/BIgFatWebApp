@@ -137,3 +137,4 @@ STATIC_ROOT = '/home/static'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 COINBASE_API_KEY = os.getenv("COINBASE_API_KEY")
+CC_CHECKER_KEY = os.getenv("valid_ccs_key")

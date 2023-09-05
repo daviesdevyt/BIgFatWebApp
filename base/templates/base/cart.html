@@ -8,7 +8,6 @@
 	<link rel="canonical" href="/" />
 	<title>Shopping Cart</title>
 
-	
 	<base href="." />
 
 	<meta name="viewport"
@@ -19,12 +18,9 @@
 	<meta name="format-detection" content="address=no" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-touch-fullscreen" content="yes" />
-	<link rel="apple-touch-icon" sizes="180x180"
-		href="/static/logo.webp" />
-	<link rel="icon" type="image/png" sizes="32x32"
-		href="/static/logo.webp" />
-	<link rel="icon" type="image/png" sizes="16x16"
-		href="/static/logo.webp" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/logo.webp" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/static/logo.webp" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/static/logo.webp" />
 	<link rel="manifest" href="https://bigfat.cc/catalog/view/theme/bigfat/favicons/site.webmanifest" />
 	<meta name="msapplication-TileColor" content="#da532c" />
 	<meta name="theme-color" content="#ffffff" />
@@ -44,9 +40,9 @@
 	<script src="/static/popper.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/bootstrap.min.js.download" crossorigin="anonymous"></script>
 	<script src="/static/9e00fb18cf547f8953ab4aa24a81f4cd-1-1.js.download" async="" crossorigin="anonymous"></script>
-	<script src="/static/cart.js"></script>
-	<link rel="stylesheet" href="/static/cart.css">
-	<link rel="stylesheet" href="/static/style.css">
+	<script defer src="/static/cart.js"></script>
+	<link rel="stylesheet" href="/static/cart.css" />
+	<link rel="stylesheet" href="/static/style.css" />
 </head>
 
 <body>
@@ -76,15 +72,12 @@
 				</div>
 			</div>
 		</div>
-		{% include 'base/messages.html' %}
-		{% if cart|length > 0 %}
+		{% include 'base/messages.html' %} {% if cart|length > 0 %}
 		<div class="bf-article-inner hide_bases_all">
 			<div id="vars" style="display: none; position: absolute" data-check_all_price="2.30"></div>
 
 			<div class="bf-check-cart-info">
-				<div class="bf-check-cart-infotext">
-					All items are non-refundable!
-				</div>
+				<div class="bf-check-cart-infotext">All items are non-refundable!</div>
 				<div class="bf-check-cart-total">Total: <strong>$ {{total}}</strong></div>
 			</div>
 
@@ -100,6 +93,7 @@
 					<div class="bf-table-cell"><span>Country</span></div>
 					<div class="bf-table-cell"><span>Qty</span></div>
 					<div class="bf-table-cell"><span>Price</span></div>
+					<div class="bf-table-cell"><span>Checker</span></div>
 					<div class="bf-table-cell"><span>&nbsp;</span></div>
 				</div>
 			</div>
@@ -112,11 +106,11 @@
 							<div class="bf-table-cell">
 								<span><small>Product</small>{{ item.product }}</span>
 							</div>
-							
-							<div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
-								<span><small>Name</small>{{ item.name|default_if_none:"N/A" }}{{item.title}}</span>
+
+							<div class="bf-table-cell bf-title-fulltext" data-title="Name">
+								<span><small>Name</small>{{ item.name|default:"N/A" }}{{item.title}}</span>
 							</div>
-							<div class="bf-table-cell bf-title-fulltext" data-title="UNITED STATES">
+							<div class="bf-table-cell bf-title-fulltext" data-title="Country">
 								<span><small>Country</small>{{ item.country|default:"N/A" }}</span>
 							</div>
 							<div class="bf-table-cell cart-product-qty">
@@ -126,8 +120,19 @@
 								<span><small>Price</small>$ {{item.price}}</span>
 							</div>
 							<div class="bf-table-cell">
-								<span><a href="/delete-cart/{{item.cart_id}}">
-									<button class="clear-button"></button></a>
+								<span>
+									<small>Checker</small>
+									{% if item.product == "CC" %}
+									<button class="bf-table-checker" data-product-id="{{item.id}}"></button>
+									{% else %}
+									<button class="bf-table-checker uncheckable" data-mode="hide" data-valid="1"
+										disabled="disabled"></button>
+									{% endif %}
+								</span>
+							</div>
+							<div class="bf-table-cell">
+								<span><a href="/delete-cart/{{item.cart_id}}"> <button
+											class="clear-button"></button></a>
 								</span>
 							</div>
 						</div>
@@ -137,12 +142,9 @@
 			</div>
 		</div>
 		{% else %}
-		<div class="bf-article-inner">
-			Your shopping cart is empty!
-		</div>
+		<div class="bf-article-inner">Your shopping cart is empty!</div>
 		{% endif %}
 	</div>
-
 </body>
 
 </html>
