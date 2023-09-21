@@ -8,7 +8,7 @@ admin.site.register(News)
 class CCAdmin(admin.ModelAdmin):
     list_display = ('base', 'country', 'state', 'purchased', 'date_created')
     list_filter = ('base', 'country', 'state', 'purchased', 'date_created')
-    search_fields = ('base', 'country', 'state')
+    search_fields = ('id', 'base', 'country', 'state')
     ordering = ('-date_created',)
     list_per_page = 25
 
@@ -16,14 +16,14 @@ class CCAdmin(admin.ModelAdmin):
 class FullzAdmin(admin.ModelAdmin):
     list_display = ('category', 'country', 'purchased', 'date_created')
     list_filter = ('category', 'country', 'purchased', 'date_created')
-    search_fields = ('base', 'country', 'state')
+    search_fields = ('id', 'base', 'country', 'state')
     ordering = ('-date_created',)
 
 @admin.register(Logs)
 class LogsAdmin(admin.ModelAdmin):
     list_display = ('title', "category", 'purchased', 'date_created')
     list_filter = ('title', 'category', "purchased", 'date_created')
-    search_fields = ('title', 'description', 'category')
+    search_fields = ('id', 'title', 'description', 'category')
     ordering = ('-date_created',)
 
 
@@ -31,14 +31,14 @@ class LogsAdmin(admin.ModelAdmin):
 class GuidesAdmin(admin.ModelAdmin):
     list_display = ('title', "category", 'purchased', 'date_created')
     list_filter = ('title', 'category', "purchased", 'date_created')
-    search_fields = ('title', 'description', 'category')
+    search_fields = ('id', 'title', 'description', 'category')
     ordering = ('-date_created',)
 
 @admin.register(Services)
 class ServicesAdmin(admin.ModelAdmin):
     list_display = ('title', "category", 'purchased', 'date_created')
     list_filter = ('title', 'category', "purchased", 'date_created')
-    search_fields = ('title', 'description', 'category')
+    search_fields = ('id', 'title', 'description', 'category')
     ordering = ('-date_created',)
 
 @admin.register(CCBase)
@@ -52,5 +52,5 @@ class CCBaseAdmin(admin.ModelAdmin):
 class DumpsAdmin(admin.ModelAdmin):
     list_display = ('cc_type', "code", "bank", 'country', 'purchased', 'date_created')
     list_filter = ('cc_type', "code", "bank", 'country', 'purchased', 'date_created')
-    search_fields = ('code', "bank", 'country', 'cc_type')
+    search_fields = ('id', 'code', "bank", 'country', 'cc_type')
     ordering = ('-date_created',)   
