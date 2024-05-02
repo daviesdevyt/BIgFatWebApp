@@ -54,7 +54,7 @@ def verify_tx(request, pay_id):
             messages.error(request, f"Transaction status: {res.status.title()}")
 
         elif res.status == TransactionStatus.COMPLETED:
-            amt = float(res.source_rate*res.amount)
+            amt = float(res.amount/res.source_rate)
             tx.amount = amt
             user = User.objects.filter(id=request.user.id)
             user.update(pay_id=None, balance=user.first().balance+amt)
