@@ -1,3 +1,5 @@
+import random
+import string
 from django.core.cache import cache
 
 # def get_cc_status(name, ccn, mm, yy, cvv, email):
@@ -70,7 +72,7 @@ from django.core.cache import cache
 #     return "DEAD"
 
 def confirm_payment(response):
-    return response["data"]["payments"][0]["status"] if len(response["data"]["payments"]) > 0 else "PENDING"
+    return response.status
 
 def filter_objects(request, model, attrs, name):
     filters = {}
@@ -88,3 +90,7 @@ def filter_objects(request, model, attrs, name):
             unique[attr] = model.objects.filter(purchased=False).values_list(attr, flat=True).distinct(attr)
         cache.set(cache_key, unique, 60*60*3)
     return unique, filters
+
+
+def random_string(length=10):
+    return ("".join(random.choices(string.ascii_lowercase, k=length)))

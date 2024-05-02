@@ -115,11 +115,21 @@
 							<br />
 							<h2>Status: <span id="tx-status">{{tx.status}}</span></h2>
 							<br>
+							<a href="{{invoice_url}}" id="input-calc"
+								class="verify-payment" target="_blank">Pay</a>
 							<a href="/verify/{{request.user.pay_id}}" id="input-calc"
 								class="verify-payment">Verify Transaction</a>
 							{% else %}
 							<form action="" method="post">
 								{% csrf_token %}
+								<input type="number" name="amount" min="10" id="amount-input">
+								<select name="currency" id="currency-selector">
+									<!-- coins = ["btc", "xmr", "ltc", "eth"] -->
+									<option value="btc">Bitcoin</option>
+									<option value="xmr">Monero</option>
+									<option value="ltc">Litecoin</option>
+									<option value="eth">Ethereum</option>
+								</select>
 								<button id="input-calc" class="start-payment">Start Payment</button>
 							</form>
 							{% endif %}
