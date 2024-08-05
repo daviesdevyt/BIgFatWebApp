@@ -82,12 +82,11 @@ def filter_objects(request, model, attrs, name):
         filters[var] = value
     
     cache_key = f"{name}_filters"
-    if cache.get(cache_key):
-        unique = cache.get(cache_key)
-    else:
+    unique = cache.get(cache_key)
+    if not unique:
         unique = {}
         for attr in attrs:
-            unique[attr] = model.objects.filter(purchased=False).values_list(attr, flat=True).distinct(attr)
+            unique[attr] = model.objects.filter(purchased=False).values_list(attr, flat=True).distinct()
         cache.set(cache_key, unique, 60*60*3)
     return unique, filters
 
